@@ -1,0 +1,90 @@
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 20170131191029) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "devices", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "model"
+    t.string   "brand"
+    t.string   "manufactured_by"
+    t.date     "manufacturing_date"
+    t.string   "barcode"
+    t.decimal  "cost_to_company",           precision: 5, scale: 2
+    t.string   "selling_status"
+    t.string   "working_status"
+    t.string   "usage_type"
+    t.string   "current_ip"
+    t.datetime "first_used"
+    t.datetime "last_used"
+    t.string   "user_provided_name"
+    t.text     "user_provided_description"
+    t.string   "otp_token"
+    t.datetime "otp_token_expiry"
+    t.datetime "deleted_at"
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+  end
+
+  add_index "devices", ["deleted_at"], name: "index_devices_on_deleted_at", using: :btree
+
+  create_table "devices_users", force: :cascade do |t|
+    t.integer "users_id"
+    t.integer "devices_id"
+    t.string  "role"
+    t.boolean "currently_accessible"
+  end
+
+  add_index "devices_users", ["devices_id"], name: "index_devices_users_on_devices_id", using: :btree
+  add_index "devices_users", ["users_id"], name: "index_devices_users_on_users_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles_users", force: :cascade do |t|
+    t.integer "users_id"
+    t.integer "roles_id"
+  end
+
+  add_index "roles_users", ["roles_id"], name: "index_roles_users_on_roles_id", using: :btree
+  add_index "roles_users", ["users_id"], name: "index_roles_users_on_users_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "password",           null: false
+    t.string   "token",              null: false
+    t.string   "otp_token"
+    t.datetime "otp_token_expiry"
+    t.datetime "deleted_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["phone_number"], name: "index_users_on_phone_number", using: :btree
+
+end
