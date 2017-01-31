@@ -46,3 +46,6 @@ group :development do
 end
 
 gem 'paperclip', '~> 5.0.0'
+gem 'awesome_print'
+gem 'paper_trail'
+gem 'paranoia'
