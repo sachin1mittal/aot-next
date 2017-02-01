@@ -68,12 +68,13 @@ ActiveRecord::Schema.define(version: 20170131194843) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "oauth_token"
     t.string   "email"
     t.string   "phone_number"
-    t.string   "password",           null: false
-    t.string   "token",              null: false
-    t.string   "otp_token"
-    t.datetime "otp_token_expiry"
+    t.string   "password"
+    t.datetime "oauth_expires_at"
     t.datetime "deleted_at"
     t.string   "photo_file_name"
     t.string   "photo_content_type"

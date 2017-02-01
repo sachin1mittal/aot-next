@@ -49,3 +49,7 @@ gem 'paperclip', '~> 5.0.0'
 gem 'awesome_print'
 gem 'paper_trail'
 gem 'paranoia'
+gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'omniauth-facebook'
+gem "font-awesome-rails"
+gem 'bootstrap-sass', '~> 3.3.6'
