@@ -51,5 +51,6 @@ gem 'paper_trail'
 gem 'paranoia'
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'omniauth-facebook'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'aws-sdk', '~> 2'

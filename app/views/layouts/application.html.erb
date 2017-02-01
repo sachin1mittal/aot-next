@@ -12,24 +12,11 @@
       <% flash.each do |key, value| %>
           <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
-      <div>
-        <% if current_user %>
-          Signed in as <strong><%= current_user.name %></strong>!
-          <%= link_to "Sign out", signout_path, id: "sign_out" %>
-        <% else %>
-          <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-          <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-        <% end %>
-      </div>
-
-    <%= render "partials/sidenav" %>
-    <%= render "partials/topnav" %>
-
-    <%= yield %>
-
-      <%= render "partials/footer" %>
+      <%#= render "partials/sidenav" %>
+      <%#= render "partials/topnav" %>
+      <%= yield %>
+      <%#= render "partials/footer" %>
       <%= javascript_include_tag 'footermanifest', 'data-turbolinks-track' => true %>
-
     </div>
   </body>
 </html>

@@ -43,14 +43,14 @@ ActiveRecord::Schema.define(version: 20170131194843) do
   add_index "devices", ["deleted_at"], name: "index_devices_on_deleted_at", using: :btree
 
   create_table "devices_users", force: :cascade do |t|
-    t.integer "users_id"
-    t.integer "devices_id"
+    t.integer "user_id"
+    t.integer "device_id"
     t.string  "role"
     t.boolean "currently_accessible"
   end
 
-  add_index "devices_users", ["devices_id"], name: "index_devices_users_on_devices_id", using: :btree
-  add_index "devices_users", ["users_id"], name: "index_devices_users_on_users_id", using: :btree
+  add_index "devices_users", ["device_id"], name: "index_devices_users_on_device_id", using: :btree
+  add_index "devices_users", ["user_id"], name: "index_devices_users_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "label"
