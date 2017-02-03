@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 20170131194843) do
   end
 
   create_table "roles_users", force: :cascade do |t|
-    t.integer "users_id"
-    t.integer "roles_id"
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
-  add_index "roles_users", ["roles_id"], name: "index_roles_users_on_roles_id", using: :btree
-  add_index "roles_users", ["users_id"], name: "index_roles_users_on_users_id", using: :btree
+  add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id", using: :btree
+  add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
