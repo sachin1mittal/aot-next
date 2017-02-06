@@ -1,0 +1,14 @@
+<div class="col-md-10 col-md-offset-1">
+  <table class="table table-striped table-hover ">
+    <thead>
+      <tr>
+        <% device_columns.each do |column_name| %>
+          <th><%= column_name %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'device_for_admin', collection: devices %>
+    </tbody>
+  </table>
+</div>

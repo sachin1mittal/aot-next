@@ -1,19 +1,12 @@
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1364333446973754',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-    FB.AppEvents.logPageView();
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
+<% if not current_user %>
+  <div id="full-width">
+    <div class="container">
+      <h2>Please Login To Proceed</h2>
+      <div>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", class: 'btn btn-danger login-button' %>
+        <br>
+        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", class: 'btn btn-info login-button' %>
+      </div>
+    </div>
+  </div>
+<% end %>

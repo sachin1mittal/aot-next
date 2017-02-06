@@ -11,9 +11,19 @@
     <%= render "partials/topnav" if current_user %>
     <div class="container body">
       <% flash.each do |key, value| %>
-          <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
+        <% if key == 'notice' %>
+          <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= value %>
+          </div>
+        <% elsif key == 'alert' %>
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <%= value %>
+          </div>
+        <% end %>
       <% end %>
     </div>
-      <%= yield %>
+    <%= yield %>
   </body>
 </html>

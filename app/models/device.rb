@@ -1,24 +1,19 @@
 class Device < ActiveRecord::Base
-  has_many :devices_users, dependent: :destroy
-  has_many :users, through: :devices_users
+  has_one :devices_owner, -> { where(role: :owner) }, class_name: 'DevicesUser', dependent: :destroy
+  has_one :owner, through: :devices_owner, source: :user
 
-  enum selling_status: {
-    brand_new: 'brand_new',
-    active: 'active',
-    inactive: 'inactive',
-    defective: 'defective'
-  }
-
-  enum working_status: {
+  enum status: {
     on: 'on',
     off: 'off'
   }
 
-  enum usage_type: {
-    personal: 'personal',
-    shareable: 'shareable'
-  }
-
   acts_as_paranoid
   has_paper_trail
+
+  before_validation :init
+  validates_presence_of :user_provided_name, :password, :token, :current_ip
+
+  def init
+    self.status ||= 'off'
+  end
 end

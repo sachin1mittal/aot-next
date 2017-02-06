@@ -6,11 +6,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if current_user.admin? %>
         <ul class="nav navbar-nav">
-          <li><a href="#">Users</a></li>
-          <li><a href="#">Devices</a></li>
+          <li><%= link_to 'Users', users_path %></li>
+          <li><%= link_to 'Devices', devices_path(all_devices: 'yes') %></li>
         </ul>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Add New Device', new_device_path %></li>
         <li><%= link_to 'Log Out ' + current_user.name, session_path(current_user), method: :delete %></li>
       </ul>
     </div>

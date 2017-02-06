@@ -9,4 +9,11 @@ class DevicesUser < ActiveRecord::Base
 
   validates_presence_of :role
   has_paper_trail
+
+  before_validation :init
+
+  def init
+    self.role ||= 'owner'
+    self.currently_accessible ||= true
+  end
 end
