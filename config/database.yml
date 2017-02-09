@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['AOT_DATABASE_HOST'] %>
+  port: <%= ENV['AOT_DATABASE_PORT'] %>
+  username: <%= ENV['AOT_DATABASE_USERNAME'] %>
+  password: <%= ENV['AOT_DATABASE_PASSWORD'] %>
+  pool: 5
+
+development:
+  <<: *default
+  database: aot-next_development
+
+test:
+  <<: *default
+  database: aot-next_test
+
+production:
+  <<: *default
+  database: aot-next_production
