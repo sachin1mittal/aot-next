@@ -6,8 +6,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :provider
       t.string :oauth_token
       t.string :email, index: true
-      t.string :phone_number, index: true
-      t.string :password
       t.datetime :oauth_expires_at
       t.datetime :deleted_at, index: true
       t.attachment :photo

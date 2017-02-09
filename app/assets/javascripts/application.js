@@ -18,5 +18,36 @@
 //= require_tree
 
 $(document).ready(function() {
-  $('input:checkbox').bootstrapSwitch();
+
+  $('.bootstrap-switch').bootstrapSwitch({
+    onColor: 'success',
+    offColor: 'danger',
+    size: 'small'
+  });
+
+  $('.device-state-handler').on('switchChange.bootstrapSwitch', function (event, state) {
+    var self = this;
+    $(self).bootstrapSwitch('disabled',true);
+
+    var deviceId = $(this).parents('.panel-body').find('input:hidden')[0].value;
+    var triggeredState = state ? 'on' : 'off'
+
+    var request = $.ajax({
+      url: "devices/" + deviceId + "/toggle",
+      type: "PUT",
+      data: { state: triggeredState },
+      dataType: "JSON"
+    });
+
+    request.success(function(data) {
+      $(self).bootstrapSwitch('disabled', false);
+      if(!data.success) {
+        $(self).bootstrapSwitch('state', !state, true);
+        $('#flash-container').append('<div class="alert alert-dismissible alert-danger">' +
+           '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+            data.message +
+         '</div>');
+      }
+    });
+  });
 });

@@ -11,48 +11,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131194843) do
+ActiveRecord::Schema.define(version: 20170209071912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "devices", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "barcode"
     t.string   "token"
     t.string   "password"
     t.string   "status"
     t.string   "usage_type"
-    t.string   "current_ip"
+    t.string   "api"
     t.string   "user_provided_name"
-    t.text     "user_provided_description"
-    t.string   "otp_token"
-    t.datetime "otp_token_expiry"
     t.datetime "deleted_at"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "devices", ["deleted_at"], name: "index_devices_on_deleted_at", using: :btree
 
   create_table "devices_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "device_id"
-    t.string  "role"
-    t.boolean "currently_accessible"
+    t.integer  "user_id"
+    t.integer  "device_id"
+    t.string   "role"
+    t.boolean  "currently_accessible"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "devices_users", ["device_id"], name: "index_devices_users_on_device_id", using: :btree
   add_index "devices_users", ["user_id"], name: "index_devices_users_on_user_id", using: :btree
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "label"
+  create_table "permissions", force: :cascade do |t|
+    t.string   "controller"
+    t.string   "action"
+    t.string   "status"
+    t.string   "category"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles_users", force: :cascade do |t|
+  add_index "permissions", ["deleted_at"], name: "index_permissions_on_deleted_at", using: :btree
+
+  create_table "permissions_roles", id: false, force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+  end
+
+  add_index "permissions_roles", ["permission_id"], name: "index_permissions_roles_on_permission_id", using: :btree
+  add_index "permissions_roles", ["role_id"], name: "index_permissions_roles_on_role_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "label"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "roles", ["deleted_at"], name: "index_roles_on_deleted_at", using: :btree
+
+  create_table "roles_users", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
@@ -66,8 +85,6 @@ ActiveRecord::Schema.define(version: 20170131194843) do
     t.string   "provider"
     t.string   "oauth_token"
     t.string   "email"
-    t.string   "phone_number"
-    t.string   "password"
     t.datetime "oauth_expires_at"
     t.datetime "deleted_at"
     t.string   "photo_file_name"
@@ -80,7 +97,6 @@ ActiveRecord::Schema.define(version: 20170131194843) do
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["phone_number"], name: "index_users_on_phone_number", using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",  null: false

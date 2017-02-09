@@ -38,12 +38,9 @@ class DevicesController < ApplicationController
   end
 
   def toggle
+    param! :state, String, in: %w(on off)
     response = DeviceManager.new(@device).toggle(params[:state])
-    if response[:success] == true
-      #render js  with positive response
-    else
-      #render js  with negative response
-    end
+    render json: response
   end
 
   private
@@ -65,11 +62,11 @@ class DevicesController < ApplicationController
     if current_user.admin?
       @device ||= Device.find(params[:id] || params[:device_id])
     else
-      current_user.devices.find(params[:id] || params[:device_id])
+      @device ||= current_user.devices.find(params[:id] || params[:device_id])
     end
   end
 
   def params_attributes
-    params.require(:device).permit(:user_provided_name, :token, :password, :current_ip)
+    params.require(:device).permit(:user_provided_name, :token, :password, :api)
   end
 end

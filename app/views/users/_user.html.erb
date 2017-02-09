@@ -4,4 +4,11 @@
   <td><%= user.email %></td>
   <td><%= user.oauth_expires_at %></td>
   <td><%= user.created_at %></td>
+  <% if not user.id == current_user.id %>
+    <% if user.admin? %>
+      <td><%= link_to 'Remove Admin Permissions', user_remove_role_path(user, role: :admin), class: 'btn btn-danger', method: :put %></td>
+    <% else %>
+      <td><%= link_to 'Add Admin Permissions', user_add_role_path(user, role: :admin), class: 'btn btn-success', method: :put  %></td>
+    <% end %>
+  <% end %>
 </tr>

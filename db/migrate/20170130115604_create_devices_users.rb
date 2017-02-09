@@ -5,6 +5,7 @@ class CreateDevicesUsers < ActiveRecord::Migration
       t.references :device, index: true
       t.string :role
       t.boolean :currently_accessible
+      t.timestamps null: false
     end
   end
 end

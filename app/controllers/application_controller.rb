@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+
+  protect_from_forgery
 
   helper_method :current_user
   before_action :authenticate_user
@@ -14,6 +13,10 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if session[:user_id].nil?
       redirect_to login_path
+    elsif not current_user.permitted?(params[:controller], params[:action])
+      flash[:alert] = 'You Dont Have Permission to access this page'
+      flash.keep
+      redirect_to root_path
     end
   end
 end

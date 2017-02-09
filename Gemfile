@@ -52,4 +52,5 @@ gem 'paranoia'
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'omniauth-facebook'
 gem 'aws-sdk', '~> 2'
-
+gem 'rest-client'
+gem 'rails_param'
