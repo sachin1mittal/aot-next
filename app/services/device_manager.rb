@@ -26,7 +26,7 @@ class DeviceManager
   end
 
   def toggle_physical_device(state)
-    self.response = RestClient.post(device.current_ip, { token: device.token, password: device.password })
+    self.response = RestClient.post(device.api, { token: device.token, password: device.password })
     self.response = JSON.parse(self.response)
                         .select do |key, value|
                           [:success, 'success', 'message', :message].include?(key)
