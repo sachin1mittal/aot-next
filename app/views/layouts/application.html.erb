@@ -6,25 +6,22 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-  <body>
-    <%= render "partials/topnav" if current_user %>
-    <div class="container body" id="flash-container">
-      <% flash.each do |key, value| %>
-        <% if key == 'notice' %>
-          <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= value %>
-          </div>
-        <% elsif key == 'alert' %>
-          <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= value %>
-          </div>
+  <body class="nav-md">
+    <% if current_user %>
+      <div class="container body">
+        <% flash.each do |key, value| %>
+            <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
         <% end %>
-      <% end %>
-    </div>
-    <%= yield %>
+      <%= render "partials/sidenav" %>
+      <%= render "partials/topnav" %>
+      <%= yield %>
+        <%= render "partials/footer" %>
+    <% else %>
+      <%= yield %>
+    <% end %>
+    <%= javascript_include_tag 'footermanifest', 'data-turbolinks-track' => true %>
   </body>
 </html>

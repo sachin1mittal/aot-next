@@ -13,27 +13,27 @@ class DevicesController < ApplicationController
   def create
     @device = current_user.devices.create(params_attributes)
     if @device.persisted?
-      redirect_to devices_path, notice: 'Device Added Successfully'
+      redirect_to devices_path, success: 'Device Added Successfully'
     else
-      flash.now[:alert] = device_errors
+      flash.now[:danger] = device_errors
       render :new
     end
   end
 
   def update
     if @device.update(params_attributes)
-      redirect_to devices_path, notice: 'Device Updated Successfully'
+      redirect_to devices_path, success: 'Device Updated Successfully'
     else
-      flash.now[:alert] = device_errors
+      flash.now[:danger] = device_errors
       render :edit
     end
   end
 
   def destroy
     if @device.destroy
-      redirect_to devices_path, notice: 'Device has been Successfully Removed'
+      redirect_to devices_path, success: 'Device has been Successfully Removed'
     else
-      redirect_to devices_path, alert: device_errors
+      redirect_to devices_path, danger: device_errors
     end
   end
 

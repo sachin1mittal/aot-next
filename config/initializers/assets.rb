@@ -7,6 +7,6 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile = [['*.js', '*.css', '*.scss', '*.jpg', '*.gif', '*.ico', '*.png',
                                               # '*.otf', '*.eot', '*.svg', '*.ttf', '*.woff', '*.woff2',
                                               # '*.less', '*.html']]
-
+Rails.application.config.assets.precompile += %w( footermanifest.js )
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.

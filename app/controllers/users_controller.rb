@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def login
     if session[:user_id].present?
-      redirect_to root_path, notice: 'You Are Already Logged In'
+      redirect_to root_path, success: 'You Are Already Logged In'
     end
   end
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     role = Role.find_by(label: params[:role])
     user = User.find(params[:user_id])
     user.roles.push(role)
-    flash[:notice] = 'Successfully Added Role'
+    flash[:success] = 'Successfully Added Role'
     flash.keep
     redirect_to action: :index
   end
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     role = Role.find_by(label: params[:role])
     user = User.find(params[:user_id])
     user.roles.destroy(role)
-    flash[:notice] = 'Successfully Removed Role'
+    flash[:success] = 'Successfully Removed Role'
     flash.keep
     redirect_to action: :index
   end

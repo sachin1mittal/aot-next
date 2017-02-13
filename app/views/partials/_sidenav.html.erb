@@ -1,0 +1,55 @@
+
+<div class="main_container">
+
+  <div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+
+      <div class="navbar nav_title" style="border: 0;">
+        <a href="index.html" class="site_title"><i class="fa fa-cloud"></i> <span>AOT Next</span></a>
+      </div>
+      <div class="clearfix"></div>
+
+
+      <!-- menu profile quick info -->
+      <div class="profile">
+        <div class="profile_pic">
+          <%= image_tag current_user.photo(:small), :class => "img-circle profile_img"  %>
+        </div>
+        <div class="profile_info">
+          <span>Welcome,</span>
+          <h2><%= current_user.name.titleize %></h2>
+        </div>
+      </div>
+      <!-- /menu profile quick info -->
+
+      <br />
+
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+        <div class="menu_section">
+          <h3 style="color: #253d54; text-shadow:  1px 1px #253d54;">-</h3>
+          <ul class="nav side-menu">
+            <li><a><i class="fa fa-user"></i>Profile<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none">
+                <li><a href="index.html">Update Details</a>
+                </li>
+                <li><a href="index2.html">Your Credentials</a>
+                </li>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-fax"></i>Devices<span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none">
+                <li><a href="form.html">Owned Devices</a>
+                </li>
+                <li><a href="form_advanced.html">Shared Devices</a>
+                </li>
+                <li><a href="form_validation.html">Devices Under Control</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
