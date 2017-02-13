@@ -12,6 +12,30 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def update
+    if current_user.update(params_attribute)
+      render :show, success: 'Profile Updated Successfully'
+    else
+      render :edit, danger: user_errors(current_user)
+    end
+  end
+
+  def change_token
+    if user_manager.change_token
+      render :show, success: 'Secret Token Updated Successfully'
+    else
+      render :edit, danger: user_errors(current_user)
+    end
+  end
+
+  def destroy
+    if current_user.destroy
+      redirect_to login_path
+    else
+      render :show, danger: user_errors(current_user)
+    end
+  end
+
   def add_role
     role = Role.find_by(label: params[:role])
     user = User.find(params[:user_id])
@@ -28,5 +52,19 @@ class UsersController < ApplicationController
     flash[:success] = 'Successfully Removed Role'
     flash.keep
     redirect_to action: :index
+  end
+
+  private
+
+  def user_manager
+    @user_manager ||= UserManager.new(current_user)
+  end
+
+  def params_attributes
+    params.require(:user).permit(:name, :photo)
+  end
+
+  def user_errors(user)
+    user.errors.messages.map{|key, value| key.to_s + ' ' + value.join(', ') }.join(', ')
   end
 end

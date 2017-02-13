@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   get '/login', to: 'users#login', as: :login
 
   resources :sessions, only: [:create, :destroy]
-  resources :users, only: :index do
+  resources :users, except: [:create, :new] do
     put 'add_role'
     put 'remove_role'
+    put 'change_token'
   end
   resources  :devices, except: [:show] do
     put 'toggle'

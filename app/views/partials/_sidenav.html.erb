@@ -5,7 +5,7 @@
     <div class="left_col scroll-view">
 
       <div class="navbar nav_title" style="border: 0;">
-        <a href="index.html" class="site_title"><i class="fa fa-cloud"></i> <span>AOT Next</span></a>
+        <%= link_to 'AOT Next', root_path, class: "site_title"%>
       </div>
       <div class="clearfix"></div>
 
@@ -13,11 +13,11 @@
       <!-- menu profile quick info -->
       <div class="profile">
         <div class="profile_pic">
-          <%= image_tag current_user.photo(:small), :class => "img-circle profile_img"  %>
+          <%= image_tag current_user.photo(:small), class: "img-circle profile_img" %>
         </div>
         <div class="profile_info">
-          <span>Welcome,</span>
-          <h2><%= current_user.name.titleize %></h2>
+          <span>Welcome</span>
+          <h2><%= link_to current_user.name.titleize, user_path(current_user) %></h2>
         </div>
       </div>
       <!-- /menu profile quick info -->
@@ -30,21 +30,13 @@
         <div class="menu_section">
           <h3 style="color: #253d54; text-shadow:  1px 1px #253d54;">-</h3>
           <ul class="nav side-menu">
-            <li><a><i class="fa fa-user"></i>Profile<span class="fa fa-chevron-down"></span></a>
-              <ul class="nav child_menu" style="display: none">
-                <li><a href="index.html">Update Details</a>
-                </li>
-                <li><a href="index2.html">Your Credentials</a>
-                </li>
-              </ul>
-            </li>
             <li><a><i class="fa fa-fax"></i>Devices<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu" style="display: none">
-                <li><a href="form.html">Owned Devices</a>
+                <li><a href="#">Owned Devices</a>
                 </li>
-                <li><a href="form_advanced.html">Shared Devices</a>
+                <li><a href="#">Shared Devices</a>
                 </li>
-                <li><a href="form_validation.html">Devices Under Control</a>
+                <li><a href="#">Devices Under Control</a>
                 </li>
               </ul>
             </li>
