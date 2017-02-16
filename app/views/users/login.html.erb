@@ -1,12 +1,24 @@
 <% if not current_user %>
-  <div id="full-width">
-    <div class="container">
-      <h2>Please Login To Proceed</h2>
-      <div>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in", class: 'btn btn-danger login-button' %>
-        <br>
-        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", class: 'btn btn-info login-button' %>
+  <div class="wrap" id="full-background-image">
+    <div class="contact-form">
+      <%= image_tag 'aotnext.jpg', class: 'logo-img' %>
+      <div class="account">
+        <div class="span">
+          <%= link_to "/auth/facebook", id: "sign_in" do %>
+            <%= image_tag 'facebook.png' %><i>Sign In with Facebook</i>
+            <div class="clear"></div>
+          <% end %>
+        </div>
+        <div class="span2">
+          <%= link_to "/auth/google_oauth2", id: "sign_in" do %>
+              <%= image_tag 'gplus.png' %><i>Sign In with Google+</i>
+              <div class="clear"></div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 <% end %>
+
+
+
