@@ -1,19 +1,12 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authenticate_user, only: :login
-
-  def login
-    if session[:user_id].present?
-      redirect_to root_path, success: 'You Are Already Logged In'
-    end
-  end
-
   def index
     @users = User.all
   end
 
   def update
     if current_user.update(params_attribute)
+      user_manager.update_password(params[:password])
       render :show, success: 'Profile Updated Successfully'
     else
       render :edit, danger: user_errors(current_user)
@@ -30,7 +23,8 @@ class UsersController < ApplicationController
 
   def destroy
     if current_user.destroy
-      redirect_to login_path
+      session[:user_id] = nil
+      redirect_to root_path
     else
       render :show, danger: user_errors(current_user)
     end

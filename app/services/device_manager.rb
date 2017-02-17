@@ -6,42 +6,27 @@ class DeviceManager
     self.device = device
   end
 
-  # def toggle(state)
-  #   if device.id.odd?
-  #     { success: false, message: 'Device Not Responding' }
-  #   else
-  #     { success: true }
-  #   end
-  # end
+  def get_microcontroller_script
+    @user = device.owner
+    file = File.join(Rails.root, 'app', 'views', 'templates', 'device_script.text.erb')
+    ERB.new(File.read(file)).result(binding)
+  end
+
+  def add_user(user)
+    device.shared_users.push(user)
+  end
+
+  def remove_user(user)
+    if device.owner.id == user.id
+      device.devices_users.destroy_all
+      device.devices_owner.destroy
+    else
+      device.shared_users.destroy(user)
+    end
+  end
 
   def toggle(state)
-    begin
-      device.send("#{state}!")
-      toggle_physical_device(state)
-      response
-    rescue StandardError => e
-      device.toggle if device.send("#{state}?")
-      { success: false, message: e.message }
-    end
-  end
-
-  def toggle_physical_device(state)
-    self.response = RestClient.post(device.api, { token: device.token, password: device.password })
-    self.response = JSON.parse(self.response)
-                        .select do |key, value|
-                          [:success, 'success', 'message', :message].include?(key)
-                        end
-    self.response['success'] = to_boolean(self.response['success'])
-    self.response['message'] ||= 'Device Not Responding'
-    device.toggle if !response['success']
-  end
-
-  def to_boolean(value)
-    if value == 'true'
-      true
-    elsif value == 'false'
-      false
-    end
+    device.toggle
   end
 
 end

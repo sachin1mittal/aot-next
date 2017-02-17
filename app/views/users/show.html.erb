@@ -26,7 +26,7 @@
                   <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                     <div class="profile_img">
                       <div id="crop-avatar">
-                        <%= image_tag current_user.photo, class: 'img-responsive avatar-view' %>
+                        <%= image_tag current_user.photo(:medium), class: 'img-responsive avatar-view', size: '200x200' %>
                       </div>
                     </div>
                   </div>

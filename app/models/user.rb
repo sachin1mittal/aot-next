@@ -2,15 +2,31 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   has_paper_trail
 
-  has_many :devices_users, dependent: :destroy
-  has_many :devices, through: :devices_users
+  has_many :devices_users, -> { where(role: :shared_user) }, class_name: 'DevicesUser', dependent: :destroy
+  has_many :shared_devices, through: :devices_users, source: :device
+  has_many :devices_owners, -> { where(role: :owner) }, class_name: 'DevicesUser', dependent: :destroy
+  has_many :owned_devices, through: :devices_owners, source: :device
+
   has_many :permissions, through: :roles
+  has_many :networks, dependent: :destroy
   has_and_belongs_to_many :roles
-  has_attached_file :photo, styles: { small: "50x50" },
+  has_attached_file :photo, styles: { small: "50x50", medium: "200x200"},
                       path: "/public/:env/:attachment/:id/:style/:updated_at"
 
-  validates_presence_of :name
+  validates_presence_of :name, :slug
+  validates_uniqueness_of :slug
   validates_attachment :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
+
+  before_validation :init
+
+  def init
+    self.slug ||= StringGenerator.slug_for_user
+    secret_token ||= StringGenerator.sha_hash(user.uid)
+  end
+
+  def to_param
+    slug
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -26,6 +42,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def devices
+    Device.where(id: device_ids)
+  end
+
+  def device_ids
+    (shared_device_ids + owned_device_ids).uniq
+  end
+
   def admin?
     roles.admin.present?
   end
@@ -37,5 +61,9 @@ class User < ActiveRecord::Base
   def permitted?(controller, action)
     permission = Permission.where(controller: controller, action: action).first
     permission.open? || permission_ids.include?(permission.id)
+  end
+
+  def self.find(input)
+    input.to_i == 0 ? find_by_slug(input) : super
   end
 end

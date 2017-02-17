@@ -7,10 +7,10 @@ class UserManager
   end
 
   def change_token
-    user.update(secret_token: generate_secret_token)
+    user.update(secret_token: StringGenerator.sha_hash(user.uid + Time.now.to_s))
   end
 
-  def generate_secret_token
-    Digest::SHA1.hexdigest(user.uid + Time.now.to_s)
+  def update_password(password)
+    user.update(password: StringGenerator.sha_hash(password))
   end
 end

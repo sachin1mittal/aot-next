@@ -1,4 +1,7 @@
 class DevicesUser < ActiveRecord::Base
+  has_paper_trail
+  acts_as_paranoid
+
   belongs_to :user
   belongs_to :device
 
@@ -7,13 +10,12 @@ class DevicesUser < ActiveRecord::Base
     shared_user: 'shared_user'
   }
 
-  validates_presence_of :role
-  has_paper_trail
+  validates_presence_of :role, :user, :device
 
   before_validation :init
+  validates_uniqueness_of :device_id, scope: [:user_id, :role]
 
   def init
     self.role ||= 'owner'
-    self.currently_accessible ||= true
   end
 end
