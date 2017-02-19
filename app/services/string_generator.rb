@@ -1,7 +1,7 @@
 class StringGenerator
 
   def self.sha_hash(value)
-    Digest::SHA1.hexdigest(user.uid + Time.now.to_s)
+    Digest::SHA1.hexdigest(value + Time.now.to_s)
   end
 
   def self.slug_for_device

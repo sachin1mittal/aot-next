@@ -5,19 +5,16 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: :signout
   get 'login', to: 'sessions#login', as: :login
 
-  resources :users, except: [:create, :new] do
-    put 'add_role'
-    put 'remove_role'
-    post 'change_token'
-  end
+  resources :users, except: [:create, :new, :edit, :destroy]# do
+    # put 'add_role'
+    # put 'remove_role'
+    # post 'change_token'
+  # end
   resources  :networks, except: [:show] do
-    resources :devices, only: :index
+    put 'add_device'
+    put 'remove_device'
   end
-  scope :devices, as: :devices do
-    get ':category', to: 'devices#index'
-    post '', to: 'devices#create'
-  end
-  resources  :devices, except: [:index, :create] do
+  resources  :devices, except: [:new, :edit] do
     get 'script'
     put 'toggle'
     put 'add_user'

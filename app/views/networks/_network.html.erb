@@ -1,0 +1,29 @@
+<tr>
+  <td><%= network_counter + 1 %></td>
+  <td>
+    <%= h truncate(network.name, length: 30) %>
+  </td>
+  <td id="password-field">
+    <p>********<p>
+    <p class="hidden"><%= h truncate(network.password, length: 20) %></p>
+  </td>
+  <td>
+    <%= h truncate(network.description, length: 30) %>
+  </td>
+  <td>
+  <%= link_to edit_network_path(network), class: 'btn btn-danger btn-xs' do %>
+    <i class="fa fa-pencil"></i> Edit
+  <% end %>
+  <%= link_to network_path(network), method: :delete, class: 'btn btn-info btn-xs', data: {confirm: "Are you sure?"} do %>
+    <i class="fa fa-trash-o"></i> Delete
+  <% end %>
+  </td>
+</tr>
+<script>
+  $(document).ready(function() {
+    $('td#password-field').on('click', function() {
+      $(this).children().first().toggleClass('hidden');
+      $(this).children().last().toggleClass('hidden');
+    });
+  });
+</script>

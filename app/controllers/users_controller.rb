@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def edit
+  end
+
   def update
     if current_user.update(params_attribute)
       user_manager.update_password(params[:password])

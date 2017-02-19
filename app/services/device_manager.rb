@@ -25,7 +25,7 @@ class DeviceManager
     end
   end
 
-  def toggle(state)
+  def toggle
     device.toggle
   end
 

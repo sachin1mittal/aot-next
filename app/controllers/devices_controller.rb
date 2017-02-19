@@ -1,10 +1,10 @@
 class DevicesController < ApplicationController
 
-  before_action :set_owned_device, only: [:edit, :update, :add_user, :remove_user, :download_script]
-  before_action :set_device, only: [:show, :create, :destroy]
+  before_action :set_device, only: [:destroy, :toggle]
+  before_action :set_owned_device, only: [:edit, :update, :add_user, :remove_user, :script, :show]
 
   def index
-    @devices = filtered_devices
+    @devices = filtered_devices.includes(:network)
   end
 
   def new
@@ -13,23 +13,23 @@ class DevicesController < ApplicationController
 
   def create
     device = current_user.owned_devices.create(params_attributes)
-    redirect_to device_path(device), success: 'Device Added Successfully'
+    redirect_to devices_path(category: :all), success: 'Device Added Successfully'
   end
 
   def update
     @owned_device.update(params_attributes)
-    redirect_to device_path(@owned_device), success: 'Device Updated Successfully'
+    redirect_to devices_path(category: :all), success: 'Device Updated Successfully'
   end
 
   def destroy
-    owned_device_manager.remove_user(current_user)
-    redirect_to devices_path, success: 'Device has been Successfully Removed'
+    device_manager.remove_user(current_user)
+    redirect_to devices_path(category: :all), success: 'Device has been Successfully Removed'
   end
 
   def toggle
     param! :state, String, in: %w(on off)
     device_manager.toggle
-    render json: {}
+    render json: { success: :true }
   end
 
   def add_user
@@ -66,15 +66,15 @@ class DevicesController < ApplicationController
   end
 
   def set_owned_device
-    @owned_device ||= current_user.owned_devices.find(params[:id] || params[:device_id])
+    @owned_device ||= current_user.owned_devices.find_by_slug(params[:device_id]|| params[:id])
   end
 
   def set_shared_device
-    @shared_device ||= current_user.shared_devices.find(params[:id] || params[:device_id])
+    @shared_device ||= current_user.shared_devices.find_by_slug(params[:device_id]|| params[:id])
   end
 
   def set_device
-    @device ||= current_user.devices.find(params[:id] || params[:device_id])
+    @device ||= current_user.devices.find_by_slug(params[:device_id]|| params[:id])
   end
 
   def params_attributes
@@ -101,6 +101,8 @@ class DevicesController < ApplicationController
       end
     elsif params[:network_id].present?
       Network.find(params[:network_id]).devices
+    else
+      current_user.devices
     end
   end
 end

@@ -3,7 +3,7 @@ class Network < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :user
-  has_many :devices
+  has_many :devices, dependent: :nullify
 
   before_validation :init
   validates_presence_of :name, :password, :slug

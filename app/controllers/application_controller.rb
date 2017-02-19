@@ -13,10 +13,10 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if session[:user_id].nil?
       redirect_to login_path
-    # elsif not current_user.permitted?(params[:controller], params[:action])
-    #   flash[:danger] = 'You Dont Have Permission to access this page'
-    #   flash.keep
-    #   redirect_to root_path
+    elsif not current_user.permitted?(params[:controller], params[:action])
+      flash[:danger] = 'You Dont Have Permission to access this page'
+      flash.keep
+      redirect_to root_path
     end
   end
 end

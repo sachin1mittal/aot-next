@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   def init
     self.slug ||= StringGenerator.slug_for_user
-    secret_token ||= StringGenerator.sha_hash(user.uid)
+    self.secret_token ||= StringGenerator.sha_hash(self.uid)
   end
 
   def to_param

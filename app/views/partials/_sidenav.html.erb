@@ -5,7 +5,9 @@
     <div class="left_col scroll-view">
 
       <div class="navbar nav_title" style="border: 0;">
-        <%= link_to 'AOT Next', root_path, class: "site_title"%>
+        <%= link_to root_path, class: "site_title" do %>
+          <i class="fa fa-cloud"></i> <span>AOT Next</span>
+        <% end %>
       </div>
       <div class="clearfix"></div>
 
@@ -13,30 +15,37 @@
       <!-- menu profile quick info -->
       <div class="profile">
         <div class="profile_pic">
-          <%= image_tag current_user.photo(:small), class: "img-circle profile_img" %>
+          <%= image_tag current_user.photo(:small), :class => "img-circle profile_img"  %>
         </div>
         <div class="profile_info">
-          <span>Welcome</span>
-          <h2><%= link_to current_user.name.titleize, user_path(current_user), style: "color: #c7ccd2;" %></h2>
+          <h2><%= link_to current_user.name, user_path(current_user), class: 'btn btn-success' %></h2>
         </div>
       </div>
       <!-- /menu profile quick info -->
 
-      <br />
+      <br/>
 
       <!-- sidebar menu -->
       <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
         <div class="menu_section">
-          <h3 style="color: #253d54; text-shadow:  1px 1px #253d54;">-</h3>
+          <div class="clearfix"></div>
           <ul class="nav side-menu">
-            <li><a><i class="fa fa-fax"></i>Devices<span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-bolt"></i> Networks <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu" style="display: none">
-                <li><a href="#">Owned Devices</a>
+                <li><%= link_to 'Add New Network', new_network_path %>
                 </li>
-                <li><a href="#">Shared Devices</a>
+                <li><%= link_to 'My Networks', networks_path %>
                 </li>
-                <li><a href="#">Devices Under Control</a>
+              </ul>
+            </li>
+            <li><a><i class="fa fa-cogs"></i> Devices <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none">
+                <li><%= link_to 'All Devices', devices_path(category: :all) %>
+                </li>
+                <li><%= link_to 'Owned Devices', devices_path(category: :owned) %>
+                </li>
+                <li><%= link_to 'Shared Devices', devices_path(category: :shared) %>
                 </li>
               </ul>
             </li>

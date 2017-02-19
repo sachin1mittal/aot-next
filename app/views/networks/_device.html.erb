@@ -1,0 +1,22 @@
+<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+  <div class="well profile_view">
+    <div class="col-sm-12">
+      <h4 class="brief"><i><%= h truncate(device.name, length: 30) %></i></h4>
+      <div class="left col-xs-7">
+        <h2></h2>
+      </div>
+      <div class="right col-xs-5 text-center">
+      </div>
+    </div>
+    <div class="col-xs-12 bottom text-center">
+      <div class="col-xs-12">
+        <span style="float: left;">
+          <%= check_box_tag :state, 'on', device.on?, class: 'js-switch', data: { switchery: 'true', device_slug: device.slug } %>
+        </span>
+        <%= link_to network_remove_device_path(device.network, { device_id: device.slug }), style: 'float: right;', class: 'btn btn-danger btn-xs', method: :put, data: {confirm: "Are you sure?"} do %>
+          <i class="fa fa-remove"></i> Detach
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

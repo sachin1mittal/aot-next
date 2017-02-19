@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>AotNext</title>
-  <%= stylesheet_link_tag    'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application' %>
+  <%= javascript_include_tag 'application' %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,13 +15,14 @@
         <% flash.each do |key, value| %>
             <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
         <% end %>
-      <%= render "partials/sidenav" %>
-      <%= render "partials/topnav" %>
-      <%= yield %>
+        <%= render "partials/sidenav" %>
+        <%= render "partials/topnav" %>
+        <%= yield %>
         <%= render "partials/footer" %>
+        <%= javascript_include_tag 'footermanifest' %>
+      </div>
     <% else %>
       <%= yield %>
     <% end %>
-    <%= javascript_include_tag 'footermanifest', 'data-turbolinks-track' => true %>
   </body>
 </html>

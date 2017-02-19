@@ -1,74 +1,65 @@
-<div class="right_col" role="main" style="min-height: 1164px;">
+<!-- page content -->
+<div class="right_col" role="main">
   <div class="">
     <div class="page-title">
       <div class="title_left">
         <h3>User Profile</h3>
       </div>
     </div>
-
     <div class="clearfix"></div>
 
     <div class="row">
+
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-
-          <div class="x_content">
-            <div class="" role="tabpanel" data-example-id="togglable-tabs">
-              <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Personal Details</a>
-                </li>
-                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Account Credentials</a>
-                </li>
-              </ul>
-              <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-
-                  <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                    <div class="profile_img">
-                      <div id="crop-avatar">
-                        <%= image_tag current_user.photo(:medium), class: 'img-responsive avatar-view', size: '200x200' %>
-                      </div>
-                    </div>
+        <div class="x_panel" style="height:600px;">
+          <div class="x_title">
+            <h2>Take a Look!</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div>
+            <div class="x_content">
+              <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="profile_img">
+                  <div id="crop-avatar">
+                    <%= image_tag current_user.photo(:medium), class: 'img-responsive avatar-view', size: '200x200' %>
                   </div>
-                  <div class="col-md-6 col-xs-12 profile_left">
-                    <h3><%= current_user.name.titleize %></h3>
+                  <%#= link_to edit_user_path(current_user), class: 'btn btn-success', style: 'width: 200px;' do %>
+                    <!-- <i class="fa fa-edit m-right-xs"></i>Edit Profile</a> -->
+                  <%# end %>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2><%= current_user.name.titleize %></h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
 
-                    <ul class="list-unstyled user_data">
+                  <div class="">
+                    <ul class="to_do">
                       <li>
-                        <i class="fa fa-phone"></i> 9953017765
-                      </li>
-
-                      <li>
-                        <i class="fa fa-mail-forward"></i> sachinmittal33@gmail.com
-                      </li>
-
-                      <li>
-                        <i class="fa fa-map-marker"></i> San Francisco, California, USA
+                        <%= current_user.email %>
                       </li>
                     </ul>
-                    <br>
-                    <a class="btn btn-success">Edit Profile</a>
-
                   </div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                  <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel">
-                      <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        <h4 class="panel-title">Account ID</h4>
-                      </a>
-                      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
-                        <div class="panel-body">
-                        <h1>shgfsgdvsgvdg</h1>
-                        </div>
+                <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel">
+                    <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <h4 class="panel-title">Account ID</h4>
+                    </a>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                      <div class="panel-body">
+                      <h1><%= current_user.uid %></h1>
                       </div>
-                      <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
-                        <h4 class="panel-title">Secret Token</h4>
-                      </a>
-                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
-                        <div class="panel-body">
-                          <h1>shgfsgdvsgvdg</h1>
-                        </div>
+                    </div>
+                    <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
+                      <h4 class="panel-title">Secret Token</h4>
+                    </a>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                      <div class="panel-body">
+                        <h1><%= current_user.secret_token %></h1>
                       </div>
                     </div>
                   </div>

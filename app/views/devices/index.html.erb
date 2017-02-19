@@ -1,25 +1,9 @@
-<%# if @all_devices %>
-  <%#= render partial: 'all_devices', locals: { devices: @devices } %>
-<%# else %>
-  <%#= render partial: 'my_devices', locals: { devices: @devices } %>
-<%# end %>
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Devices Under Control</h3>
-      </div>
-
-      <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Device...">
-                    <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Go!</button>
-                          </span>
-          </div>
-        </div>
+        <h3>Devices</h3>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -27,7 +11,40 @@
     <div class="row">
 
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel" style="height:600px;">
+        <div class="x_panel" style="min-height:600px;">
+          <div class="x_title">
+            <h2>All Devices</h2>
+            <ul class="nav navbar-right panel_toolbox">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Add New Device</button>
+              <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <%= form_for :device do |f| %>
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel2">Enter Name</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>
+                          <div class="clearfix"></div>
+                          <%= f.text_field :name, class: 'form-control' %>
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Add">
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <%= render partial: 'device', collection: @devices %>
+          </div>
         </div>
       </div>
     </div>

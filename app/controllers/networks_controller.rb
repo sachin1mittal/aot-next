@@ -1,6 +1,6 @@
 class NetworksController < ApplicationController
 
-  before_action :set_network, only: [:edit, :update, :destroy]
+  before_action :set_network, only: [:edit, :update, :destroy, :add_device, :remove_device]
 
   def index
     @networks = current_user.networks
@@ -8,6 +8,20 @@ class NetworksController < ApplicationController
 
   def new
     @network = Network.new
+  end
+
+  def edit
+    @devices_without_network = current_user.owned_devices.where(network_id: nil)
+  end
+
+  def add_device
+    @network.devices.push(device)
+    redirect_to edit_network_path(@network), success: 'Device Added to this network'
+  end
+
+  def remove_device
+    device.update_attributes!(network_id: nil)
+    redirect_to edit_network_path(@network), success: 'Device Removed from this network'
   end
 
   def create
@@ -28,11 +42,15 @@ class NetworksController < ApplicationController
 
   private
 
+  def device
+    @device ||= current_user.owned_devices.find_by_slug(params[:device_id] || params[:id])
+  end
+
   def params_attributes
     params.require(:network).permit(:name, :description, :password)
   end
 
   def set_network
-    @network ||= Network.find(params[:id])
+    @network ||= Network.find(params[:network_id] || params[:id])
   end
 end
