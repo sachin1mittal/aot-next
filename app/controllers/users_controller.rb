@@ -7,30 +7,31 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def search_by_email
+    param! :email, String, required: true, blank: false
+    param! :device_slug, String, required: true, blank: false
+    @user = User.find_by_email!(params[:email])
+    @device = current_user.devices.find_by_slug!(params[:device_slug])
+    @already_user = @user.devices.pluck(:id).include?(@device.id) if @user.present?
+  end
+
   def update
-    if current_user.update(params_attribute)
-      user_manager.update_password(params[:password])
-      render :show, success: 'Profile Updated Successfully'
-    else
-      render :edit, danger: user_errors(current_user)
-    end
+    current_user.update(params_attribute)
+    user_manager.update_password(params[:password])
+    flash[:success] = 'Profile Updated Successfully'
+    render :show
   end
 
   def change_token
-    if user_manager.change_token
-      render :show, success: 'Secret Token Updated Successfully'
-    else
-      render :edit, danger: user_errors(current_user)
-    end
+    user_manager.change_token
+    flash[:success] = 'Secret Token Updated Successfully'
+    render :show
   end
 
   def destroy
-    if current_user.destroy
-      session[:user_id] = nil
-      redirect_to root_path
-    else
-      render :show, danger: user_errors(current_user)
-    end
+    session[:user_id] = nil
+    flash[:success] = 'You have beed logged out'
+    redirect_to root_path
   end
 
   def add_role

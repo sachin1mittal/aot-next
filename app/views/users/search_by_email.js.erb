@@ -1,0 +1,20 @@
+$('.panel-body').first().html('');
+
+<% if @already_user %>
+  $('.panel-body').first().append('<h1>This User has already access to this device</h1>');
+<% else @user.present? %>
+  $('.panel-body').first().append('<div class="thumbnail col-md-8 col-md-offset-2">' +
+    '<div class="image view view-first">' +
+      "<%= j image_tag @user.photo(:medium), style: 'width: 100%; display: block;' %>" +
+      '<div class="mask">' +
+        '<p><%= @user.name %></p>' +
+        "<%= j(link_to('Share', device_add_user_path(@device, { email: @user.email }), method: :put, class: 'btn btn-primary')) %>" +
+      '</div>' +
+    '</div>' +
+    '<div class="caption">' +
+      '<p><%= @user.email %></p>' +
+    '</div>' +
+  '</div>');
+<% end %>
+
+$('#email').val('');

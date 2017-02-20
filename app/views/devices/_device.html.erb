@@ -44,7 +44,7 @@
           <span style="float: left;">
           <%= check_box_tag :state, 'on', device.on?, class: 'js-switch', data: { switchery: 'true', device_slug: device.slug } %>
           </span>
-          <%= link_to device_path(device), style: 'float: right;', class: 'btn btn-danger btn-xs', method: :delete, data: {confirm: "If You are owner of this device, all shared user will also lose control over the device. Are you still sure to delete?"} do %>
+          <%= link_to device_path(device), style: 'float: right;', class: 'btn btn-danger btn-xs', method: :delete, data: {confirm: "All shared user will also lose control over the device. Do you still want to delete?"} do %>
             <i class="fa fa-remove"></i> Delete
           <% end %>
           <% if device.network.present? %>
@@ -52,7 +52,7 @@
               <i class="fa fa-download"></i> Script
             <% end %>
           <% end %>
-          <%= link_to '#', style: 'float: right;', class: 'btn btn-info btn-xs' do %>
+          <%= link_to device_path(device), style: 'float: right;', class: 'btn btn-info btn-xs' do %>
             <i class="fa fa-user"></i> Share
           <% end %>
         </div>
@@ -61,7 +61,13 @@
     <% else %>
 
       <div class="col-sm-12">
-        <h4 class="brief"><i><%= h truncate(device.name, length: 30) %></i></h4>
+        <button type="button" class="btn btn-link" style="width: 100%"><%= h truncate(device.name, length: 30) %></button>
+        <div class="left col-sm-12">
+          <h2>Network: </h2>
+        </div>
+        <div class="left col-sm-12">
+          <h2>Serial No: </h2>
+        </div>
         <div class="left col-xs-7">
           <h2></h2>
         </div>
@@ -73,6 +79,9 @@
           <span style="float: left;">
             <%= check_box_tag :state, 'on', device.on?, class: 'js-switch', data: { switchery: 'true', device_slug: device.slug } %>
           </span>
+          <%= link_to device_path(device), style: 'float: right;', class: 'btn btn-danger btn-xs', method: :delete, data: {confirm: "Are You Sure?"} do %>
+            <i class="fa fa-remove"></i> Delete
+          <% end %>
         </div>
       </div>
 

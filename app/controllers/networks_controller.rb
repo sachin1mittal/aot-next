@@ -16,34 +16,38 @@ class NetworksController < ApplicationController
 
   def add_device
     @network.devices.push(device)
-    redirect_to edit_network_path(@network), success: 'Device Added to this network'
+    flash[:success] = 'Device Added to this network'
+    redirect_to edit_network_path(@network)
   end
 
   def remove_device
     device.update_attributes!(network_id: nil)
-    redirect_to edit_network_path(@network), success: 'Device Removed from this network'
+    flash[:success] = 'Device Removed from this network'
+    redirect_to edit_network_path(@network)
   end
 
   def create
     network = current_user.networks.create(params_attributes)
-    redirect_to networks_path, success: 'Network Added Successfully'
+    flash[:success] = 'Network Added Successfully'
+    redirect_to networks_path
   end
 
   def update
     @network.update(params_attributes)
-    redirect_to networks_path, success: 'Network Updated Successfully'
+    flash[:success] = 'Network Updated Successfully'
+    redirect_to networks_path
   end
 
   def destroy
     @network.destroy
-    redirect_to networks_path, success: 'Network has been Successfully Removed'
+    flash[:success] = 'Network has been Successfully Removed'
+    redirect_to networks_path
   end
-
 
   private
 
   def device
-    @device ||= current_user.owned_devices.find_by_slug(params[:device_id] || params[:id])
+    @device ||= current_user.owned_devices.find_by_slug!(params[:device_id] || params[:id])
   end
 
   def params_attributes
@@ -51,6 +55,6 @@ class NetworksController < ApplicationController
   end
 
   def set_network
-    @network ||= Network.find(params[:network_id] || params[:id])
+    @network ||= Network.find_by_slug!(params[:network_id] || params[:id])
   end
 end

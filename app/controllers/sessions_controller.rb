@@ -15,7 +15,9 @@ class SessionsController < ApplicationController
 
   def login
     if session[:user_id].present?
-      redirect_to root_path, success: 'You Are Already Logged In'
+      flash[:success] = 'You Are Already Logged In'
+      redirect_to root_path
     end
+    render layout: false
   end
 end

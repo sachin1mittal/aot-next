@@ -13,17 +13,20 @@ class DevicesController < ApplicationController
 
   def create
     device = current_user.owned_devices.create(params_attributes)
-    redirect_to devices_path(category: :all), success: 'Device Added Successfully'
+    flash[:success] = 'Successfully created device'
+    redirect_to devices_path(category: :all)
   end
 
   def update
     @owned_device.update(params_attributes)
-    redirect_to devices_path(category: :all), success: 'Device Updated Successfully'
+    flash[:success] = 'Successfully updated device'
+    redirect_to devices_path(category: :all)
   end
 
   def destroy
     device_manager.remove_user(current_user)
-    redirect_to devices_path(category: :all), success: 'Device has been Successfully Removed'
+    flash[:success] = 'Success removed device'
+    redirect_to devices_path(category: :all)
   end
 
   def toggle
@@ -33,17 +36,19 @@ class DevicesController < ApplicationController
   end
 
   def add_user
-    param! :uid, String, required: true, blank: false
-    user = User.find_by_uid(params[:uid])
+    param! :email, String, required: true, blank: false
+    user = User.find_by_email!(params[:email])
     owned_device_manager.add_user(user)
-    redirect_to device_path, success: 'User has been Successfully Added'
+    flash[:success] = 'Successfully added user'
+    redirect_to device_path(@owned_device)
   end
 
   def remove_user
-    param! :uid, String, required: true, blank: false
-    user = User.find_by_uid(params[:uid])
+    param! :email, String, required: true, blank: false
+    user = User.find_by_email!(params[:email])
     owned_device_manager.remove_user(user)
-    redirect_to device_path, success: 'User has been Successfully Removed'
+    flash[:success] = 'Successfully removed user'
+    redirect_to device_path(@owned_device)
   end
 
   def script
@@ -66,15 +71,15 @@ class DevicesController < ApplicationController
   end
 
   def set_owned_device
-    @owned_device ||= current_user.owned_devices.find_by_slug(params[:device_id]|| params[:id])
+    @owned_device ||= current_user.owned_devices.find_by_slug!(params[:device_id] || params[:id])
   end
 
   def set_shared_device
-    @shared_device ||= current_user.shared_devices.find_by_slug(params[:device_id]|| params[:id])
+    @shared_device ||= current_user.shared_devices.find_by_slug!(params[:device_id] || params[:id])
   end
 
   def set_device
-    @device ||= current_user.devices.find_by_slug(params[:device_id]|| params[:id])
+    @device ||= current_user.devices.find_by_slug!(params[:device_id] || params[:id])
   end
 
   def params_attributes

@@ -17,9 +17,62 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
+            <div class="col-md-6 col-md-offset-3">
+              <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel">
+                  <div class="input-group">
+                    <input type="email" class="form-control" id="email" placeholder="User's Email you wants to share with..">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"  aria-controls="collapseTwo" data-slug="<%= @owned_device.slug %>">Search!</button>
+                    </span>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="x_title">
+            <h2>Shared Users</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <%= render partial: 'user', collection: @owned_device.shared_users, locals: { device: @owned_device } %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $("#headingTwo").on("click", function (event) {
+    var slug = $('button#headingTwo').data('slug');
+    if($('button.collapsed').length) {
+      var email = $('#email').val();
+      if(email.match(/^.+@[a-zA-Z]+\.\w+$/)) {
+        $.ajax({
+          url: "/users/search_by_email",
+          type: "GET",
+          data: { email: email, device_slug: slug },
+          dataType: "SCRIPT"
+        });
+      } else {
+        alert('Please Enter a valid email address:');
+        return false;
+      }
+    }
+  });
+</script>
+
+<style>
+  .accordion .panel:hover {
+    background: #fff;
+  }
+  .accordion .panel {
+    margin-bottom: 5px;
+    border-radius: 0;
+  }
+</style>

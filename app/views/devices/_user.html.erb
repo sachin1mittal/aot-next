@@ -1,0 +1,25 @@
+<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+  <div class="well profile_view">
+    <div class="col-sm-12">
+      <h4 class="brief"><i><%= user.name %></i></h4>
+      <div class="left col-xs-7">
+        <p><%= user.email %></p>
+      </div>
+      <div class="right col-xs-5 text-center">
+        <%= image_tag user.photo(:small), class: 'img-circle img-responsive', style: 'float: right;' %>
+      </div>
+       <div class="left col-xs-7">
+        <h2></h2>
+      </div>
+    </div>
+    <div class="col-xs-12 bottom text-center">
+      <div class="col-xs-12 col-sm-6 emphasis">
+      </div>
+      <div class="col-xs-12 col-sm-6 emphasis">
+        <%= link_to device_remove_user_path(device, { email: user.email }), style: 'float: right;', class: 'btn btn-danger btn-xs', method: :put, data: { confirm: "Are You Sure?" } do %>
+            <i class="fa fa-remove"></i> Remove
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

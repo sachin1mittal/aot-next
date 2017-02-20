@@ -13,7 +13,7 @@ class DevicesUser < ActiveRecord::Base
   validates_presence_of :role, :user, :device
 
   before_validation :init
-  validates_uniqueness_of :device_id, scope: [:user_id, :role]
+  validates_uniqueness_of :device_id, scope: [:user_id]
 
   def init
     self.role ||= 'owner'

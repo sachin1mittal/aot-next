@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: :signout
   get 'login', to: 'sessions#login', as: :login
 
-  resources :users, except: [:create, :new, :edit, :destroy]# do
+  get 'users/search_by_email', to: 'users#search_by_email'
+  resources :users, except: [:create, :new, :edit, :destroy]
+  # do
     # put 'add_role'
     # put 'remove_role'
     # post 'change_token'

@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   has_attached_file :photo, styles: { small: "50x50", medium: "200x200"},
                       path: "/public/:env/:attachment/:id/:style/:updated_at"
 
-  validates_presence_of :name, :slug
-  validates_uniqueness_of :slug
+  validates_presence_of :name, :slug, :email, :uid, :secret_token
+  validates_uniqueness_of :slug, :email, :uid, :secret_token
   validates_attachment :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
 
   before_validation :init
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 
   def permitted?(controller, action)
     permission = Permission.where(controller: controller, action: action).first
-    permission.open? || permission_ids.include?(permission.id)
+    permission.open? || permission_ids.include?(permission.id) if permission
   end
 
   def self.find(input)

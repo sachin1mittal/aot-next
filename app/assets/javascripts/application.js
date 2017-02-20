@@ -33,10 +33,6 @@
 //= require flash.js
 
 
-
-
-
-
 $(document).ready(function() {
 
   $('.js-switch').on('change', function (event, state) {
@@ -65,3 +61,6 @@ $(document).ready(function() {
     });
   });
 });
+
+
+

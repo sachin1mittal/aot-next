@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Concerns::Errors
+  include Concerns::ErrorHandlers
 
   protect_from_forgery
 
@@ -15,7 +17,6 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     elsif not current_user.permitted?(params[:controller], params[:action])
       flash[:danger] = 'You Dont Have Permission to access this page'
-      flash.keep
       redirect_to root_path
     end
   end

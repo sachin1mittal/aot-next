@@ -1051,7 +1051,7 @@ h2 {
 }
 
 .accordion .panel:hover {
-    background: #F2F5F7;
+    background: #efefef;
 }
 
 .x_panel {
@@ -4656,7 +4656,7 @@ ul.project_files li a i {
 /* *********  media gallery  **************************** */
 
 .thumbnail .image {
-    height: 120px;
+    min-height: 120px;
     overflow: hidden;
 }
 
@@ -4670,7 +4670,7 @@ ul.project_files li a i {
 }
 
 .thumbnail {
-    height: 190px;
+    min-height: 190px;
     overflow: hidden;
 }
 
