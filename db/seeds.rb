@@ -21,6 +21,7 @@ for_user = []
 # for_user.push(Permission.create(controller: :devices, action: :show))
 # for_user.push(Permission.create(controller: :devices, action: :script))
 # for_user.push(Permission.create(controller: :devices, action: :add_user))
+for_user.push(Permission.create(controller: :devices, action: :add_network))
 # for_user.push(Permission.create(controller: :devices, action: :remove_user))
 # for_user.push(Permission.create(controller: :networks, action: :index))
 # for_user.push(Permission.create(controller: :networks, action: :destroy))
@@ -33,9 +34,10 @@ for_user = []
 # for_user.push(Permission.create(controller: :users, action: :change_token))
 # for_user.push(Permission.create(controller: :users, action: :edit))
 # for_user.push(Permission.create(controller: :users, action: :show))
+# for_user.push(Permission.create(controller: :users, action: :dashboard))
 # for_user.push(Permission.create(controller: :users, action: :update))
 # for_user.push(Permission.create(controller: :users, action: :destroy))
-for_user.push(Permission.create(controller: :users, action: :search_by_email))
+# for_user.push(Permission.create(controller: :users, action: :search_by_email))
 
 
 # for_admin.push(Permission.create(controller: :users, action: :index))

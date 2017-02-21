@@ -1,0 +1,87 @@
+<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+  <div class="well profile_view">
+
+    <div class="col-sm-12">
+      <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-sm-<%= owned_device.slug %>" style="width: 100%"><%= h truncate(owned_device.name, length: 30) %></button>
+      <div class="modal fade bs-example-modal-sm-<%= owned_device.slug %>" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <%= form_for owned_device do |f| %>
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Update Name</h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <div class="clearfix"></div>
+                  <%= f.text_field :name, class: 'form-control' %>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Update">
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="left col-sm-12">
+        <h2>Serial No: <%= owned_device.serial_number %></h2>
+      </div>
+      <div class="left col-sm-12">
+      <% if owned_device.network.present? %>
+        <h2>Network: <%= link_to(h(truncate(owned_device.network.name, length: 30)), edit_network_path(owned_device.network)) %></h2>
+      <% else %>
+        <h2>Network: <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-sm-<%= owned_device.slug %>-network">Add Network</button></h2>
+        <div class="modal fade bs-example-modal-sm-<%= owned_device.slug %>-network" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <%= form_tag device_add_network_path(owned_device), method: :put do %>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel2">Select Network</h4>
+                </div>
+                <div class="modal-body">
+                  <p>
+                    <div class="clearfix"></div>
+                    <select name="network_id" class="form-control">
+                      <%= options_from_collection_for_select(@current_user.networks, :slug, :name) %>
+                    </select>
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <input type="submit" class="btn btn-primary" value="Attach">
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      </div>
+      <div class="left col-xs-7">
+        <h2></h2>
+      </div>
+      <div class="right col-xs-5 text-center">
+      </div>
+    </div>
+    <div class="col-xs-12 bottom text-center">
+      <div class="col-xs-12">
+        <%= link_to device_path(owned_device), style: 'float: left;', class: 'btn btn-danger btn-xs', method: :delete, data: {confirm: "All shared user will also lose control over the owned_device. Do you still want to delete?"} do %>
+          <i class="fa fa-remove"></i> Delete
+        <% end %>
+        <%= link_to device_path(owned_device), style: 'float: left;', class: 'btn btn-info btn-xs' do %>
+          <i class="fa fa-user"></i> Shared Users
+        <% end %>
+        <% if owned_device.network.present? %>
+          <%= link_to device_script_path(owned_device), style: 'float: left;', class: 'btn btn-dark btn-xs' do %>
+            <i class="fa fa-download"></i> Script
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

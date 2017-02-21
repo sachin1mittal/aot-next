@@ -43,7 +43,13 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <%= render partial: 'device', collection: @devices %>
+            <% if params[:category] == 'shared' %>
+              <%= render partial: 'shared_device', collection: @devices %>
+            <% elsif params[:category] == 'owned' %>
+              <%= render partial: 'owned_device', collection: @devices %>
+            <% else %>
+              <%= render partial: 'control_device', collection: @devices %>
+            <% end %>
           </div>
         </div>
       </div>

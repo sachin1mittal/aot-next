@@ -1,7 +1,8 @@
 class DevicesController < ApplicationController
 
   before_action :set_device, only: [:destroy, :toggle]
-  before_action :set_owned_device, only: [:edit, :update, :add_user, :remove_user, :script, :show]
+  before_action :set_owned_device, only: [:edit, :update, :add_user, :remove_user,
+                                          :script, :show, :add_network]
 
   def index
     @devices = filtered_devices.includes(:network)
@@ -11,22 +12,29 @@ class DevicesController < ApplicationController
     @device = Device.new
   end
 
+  def add_network
+    param! :network_id, String, required: true, blank: false
+    @owned_device.update(network: Network.find(params[:network_id]))
+    flash[:success] = 'Successfully Added Network'
+    redirect_to devices_path(category: :owned)
+  end
+
   def create
     device = current_user.owned_devices.create(params_attributes)
     flash[:success] = 'Successfully created device'
-    redirect_to devices_path(category: :all)
+    redirect_to devices_path(category: :owned)
   end
 
   def update
     @owned_device.update(params_attributes)
     flash[:success] = 'Successfully updated device'
-    redirect_to devices_path(category: :all)
+    redirect_to devices_path(category: :owned)
   end
 
   def destroy
     device_manager.remove_user(current_user)
     flash[:success] = 'Success removed device'
-    redirect_to devices_path(category: :all)
+    redirect_to devices_path(category: :owned)
   end
 
   def toggle
@@ -83,7 +91,7 @@ class DevicesController < ApplicationController
   end
 
   def params_attributes
-    params.require(:device).permit(:name, :network_id)
+    params.require(:device).permit(:name)
   end
 
   def device_manager
@@ -104,8 +112,6 @@ class DevicesController < ApplicationController
       else
         current_user.devices
       end
-    elsif params[:network_id].present?
-      Network.find(params[:network_id]).devices
     else
       current_user.devices
     end

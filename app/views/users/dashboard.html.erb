@@ -1,0 +1,85 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>User Dashboard</h3>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="height:600px;">
+          <div class="x_title">
+          <h2>Summary</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div>
+            <div class="x_content">
+              <%= link_to devices_path(category: :owned) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-credit-card"></i>
+                    </div>
+                    <div class="count"><%= @owned_devices.count %></div>
+
+                    <h3>Owned <%= 'Device'.pluralize(@owned_devices.count) %></h3>
+                  </div>
+                </div>
+              <% end %>
+
+              <%= link_to devices_path(category: :shared) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-code-fork"></i>
+                    </div>
+                    <div class="count"><%= @shared_devices.count %></div>
+
+                    <h3>Shared <%= 'Device'.pluralize(@shared_devices.count) %></h3>
+                  </div>
+                </div>
+              <% end %>
+
+              <%= link_to devices_path(category: :all) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-check-square"></i>
+                    </div>
+                    <div class="count"><%= @all_devices.count %></div>
+
+                    <h3><%= 'Device'.pluralize(@all_devices.count) %> under control</h3>
+                  </div>
+                </div>
+              <% end %>
+
+              <%= link_to networks_path do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-wifi"></i>
+                    </div>
+                    <div class="count"><%= @networks.count %></div>
+
+                      <h3><%= 'Network'.pluralize(@networks.count) %></h3>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-group"></i>
+                  </div>
+                  <div class="count"><%= @shared_users.count %></div>
+
+                  <h3>Shared <%= 'User'.pluralize(@shared_users.count) %></h3>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

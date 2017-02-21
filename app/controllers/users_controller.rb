@@ -7,6 +7,14 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def dashboard
+    @owned_devices = current_user.owned_devices
+    @shared_devices = current_user.shared_devices
+    @networks = current_user.networks
+    @shared_users = current_user.shared_users
+    @all_devices = current_user.devices
+  end
+
   def search_by_email
     param! :email, String, required: true, blank: false
     param! :device_slug, String, required: true, blank: false

@@ -1,0 +1,20 @@
+<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+  <div class="well profile_view">
+
+    <div class="col-sm-12">
+      <h2><%= h truncate(control_device.name, length: 30) %></h2>
+      <div class="left col-xs-7">
+        <h2></h2>
+      </div>
+      <div class="right col-xs-5 text-center">
+      </div>
+    </div>
+    <div class="col-xs-12 bottom text-center">
+      <div class="col-xs-12">
+        <span style="float: right;">
+          <%= check_box_tag :state, 'on', control_device.on?, class: 'js-switch', data: { switchery: 'true', device_slug: control_device.slug } %>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

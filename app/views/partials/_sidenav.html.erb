@@ -4,9 +4,14 @@
   <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
 
-      <div class="navbar nav_title" style="border: 0;">
+      <!-- <div class="navbar nav_title" style="border: 0;">
         <%= link_to root_path, class: "site_title" do %>
           <span><%= image_tag 'logo.png' %></span>
+        <% end %> -->
+      <div class="navbar nav_title">
+        <%= link_to root_path, class: 'site_title', style: 'padding: 8px;' do %>
+          <%= image_tag 'favicon.ico', style: 'margin-right: -6px;' %>
+          <span><%= image_tag 'white-logo1.png' %></span>
         <% end %>
       </div>
       <div class="clearfix"></div>
@@ -41,7 +46,7 @@
             </li>
             <li><a><i class="fa fa-cogs"></i> Devices <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu" style="display: none">
-                <li><%= link_to 'All Devices', devices_path(category: :all) %>
+                <li><%= link_to 'Control Panel', devices_path(category: :all) %>
                 </li>
                 <li><%= link_to 'Owned Devices', devices_path(category: :owned) %>
                 </li>

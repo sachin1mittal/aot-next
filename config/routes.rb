@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: :signout
   get 'login', to: 'sessions#login', as: :login
+  get 'dashboard', to: 'users#dashboard', as: :dashboard
 
   get 'users/search_by_email', to: 'users#search_by_email'
   resources :users, except: [:create, :new, :edit, :destroy]
@@ -20,8 +21,9 @@ Rails.application.routes.draw do
     get 'script'
     put 'toggle'
     put 'add_user'
+    put 'add_network'
     put 'remove_user'
   end
 
-  root to: "devices#index"
+  root to: "users#dashboard"
 end
