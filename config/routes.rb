@@ -13,16 +13,16 @@ Rails.application.routes.draw do
     # put 'remove_role'
     # post 'change_token'
   # end
-  resources  :networks, except: [:show] do
-    put 'add_device'
-    put 'remove_device'
-  end
+  # resources  :networks, except: [:show] do
+  #   put 'add_device'
+  #   put 'remove_device'
+  # end
   resources  :devices, except: [:new, :edit] do
-    get 'script'
+    # get 'script'
     put 'toggle'
-    put 'add_user'
-    put 'add_network'
-    put 'remove_user'
+    # put 'add_user'
+    # put 'add_network'
+    # put 'remove_user'
   end
 
   root to: "users#dashboard"
