@@ -11,16 +11,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209071912) do
+ActiveRecord::Schema.define(version: 20170226194223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aws_certificates", force: :cascade do |t|
+    t.integer  "aws_thing_id"
+    t.string   "certificate_id"
+    t.string   "arn"
+    t.string   "pem"
+    t.string   "public_key"
+    t.string   "private_key"
+    t.datetime "deleted_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "aws_certificates", ["aws_thing_id"], name: "index_aws_certificates_on_aws_thing_id", using: :btree
+  add_index "aws_certificates", ["deleted_at"], name: "index_aws_certificates_on_deleted_at", using: :btree
+
+  create_table "aws_policies", force: :cascade do |t|
+    t.integer  "aws_thing_id"
+    t.string   "name"
+    t.string   "arn"
+    t.string   "version_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "aws_policies", ["aws_thing_id"], name: "index_aws_policies_on_aws_thing_id", using: :btree
+  add_index "aws_policies", ["deleted_at"], name: "index_aws_policies_on_deleted_at", using: :btree
+
+  create_table "aws_things", force: :cascade do |t|
+    t.integer  "device_id"
+    t.string   "name"
+    t.string   "arn"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "aws_things", ["deleted_at"], name: "index_aws_things_on_deleted_at", using: :btree
+  add_index "aws_things", ["device_id"], name: "index_aws_things_on_device_id", using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
     t.string   "serial_number"
     t.string   "status"
+    t.string   "owner_status"
     t.integer  "network_id"
     t.datetime "deleted_at"
     t.datetime "created_at",    null: false
@@ -99,8 +140,6 @@ ActiveRecord::Schema.define(version: 20170209071912) do
     t.string   "uid"
     t.string   "provider"
     t.string   "slug"
-    t.string   "secret_token"
-    t.string   "password"
     t.string   "oauth_token"
     t.string   "email"
     t.datetime "oauth_expires_at"

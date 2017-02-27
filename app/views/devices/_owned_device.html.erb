@@ -77,9 +77,9 @@
           <i class="fa fa-user"></i> Shared Users
         <% end %>
         <%# if owned_device.network.present? %>
-          <%#= link_to device_script_path(owned_device), style: 'float: left;', class: 'btn btn-dark btn-xs' do %>
-            <!-- <i class="fa fa-download"></i> Script -->
-          <%# end %>
+          <%= link_to device_script_path(owned_device), style: 'float: left;', class: 'btn btn-dark btn-xs' do %>
+            <i class="fa fa-download"></i> Credentials
+          <% end %>
         <%# end %>
       </div>
     </div>

@@ -5,19 +5,22 @@ class DevicesController < ApplicationController
                                           :script, :show, :add_network]
 
   def index
-    @devices = filtered_devices.includes(:network)
+    @devices = filtered_devices
   end
 
-  def new
-    @device = Device.new
-  end
+  # def dummy
+  # end
 
-  def add_network
-    param! :network_id, String, required: true, blank: false
-    @owned_device.update(network: Network.find(params[:network_id]))
-    flash[:success] = 'Successfully Added Network'
-    redirect_to devices_path(category: :owned)
-  end
+  # def new
+  #   @device = Device.new
+  # end
+
+  # def add_network
+  #   param! :network_id, String, required: true, blank: false
+  #   @owned_device.update(network: Network.find(params[:network_id]))
+  #   flash[:success] = 'Successfully Added Network'
+  #   redirect_to devices_path(category: :owned)
+  # end
 
   def create
     device = current_user.owned_devices.create(params_attributes)
@@ -60,8 +63,8 @@ class DevicesController < ApplicationController
   end
 
   def script
-    data = owned_device_manager.get_microcontroller_script
-    send_data data, filename: "script.cpp"
+    data = owned_device_manager.generate_credentails_file
+    send_file File.join(Rails.root, 'public', 'temp_device_credentials', 'credentials.zip')
   end
 
   private

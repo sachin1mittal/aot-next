@@ -5,6 +5,7 @@ class CreateDevices < ActiveRecord::Migration
       t.string :slug
       t.string :serial_number
       t.string :status
+      t.string :owner_status
       t.references :network, index: true
       t.datetime :deleted_at, index: true
       t.timestamps null: false

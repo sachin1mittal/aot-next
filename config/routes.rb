@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard', as: :dashboard
 
   get 'users/search_by_email', to: 'users#search_by_email'
-  resources :users, except: [:create, :new, :edit, :destroy]
+  get 'users/help', to: 'users#help'
+  # get 'devices/dummy', to: 'devices#dummy'
+  resources :users, only: [:show]
   # do
     # put 'add_role'
     # put 'remove_role'
@@ -18,11 +20,11 @@ Rails.application.routes.draw do
   #   put 'remove_device'
   # end
   resources  :devices, except: [:new, :edit] do
-    # get 'script'
+    get 'script'
     put 'toggle'
-    # put 'add_user'
+    put 'add_user'
+    put 'remove_user'
     # put 'add_network'
-    # put 'remove_user'
   end
 
   root to: "users#dashboard"

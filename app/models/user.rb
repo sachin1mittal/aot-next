@@ -8,20 +8,19 @@ class User < ActiveRecord::Base
   has_many :owned_devices, through: :devices_owners, source: :device
 
   has_many :permissions, through: :roles
-  has_many :networks, dependent: :destroy
+  # has_many :networks, dependent: :destroy
   has_and_belongs_to_many :roles
   has_attached_file :photo, styles: { small: "50x50", medium: "200x200"},
                       path: "/public/:env/:attachment/:id/:style/:updated_at"
 
-  validates_presence_of :name, :slug, :email, :uid, :secret_token
-  validates_uniqueness_of :slug, :email, :uid, :secret_token
+  validates_presence_of :name, :slug, :email, :uid
+  validates_uniqueness_of :slug, :email, :uid
   validates_attachment :photo, content_type: { content_type: /\Aimage\/.*\Z/ }
 
   before_validation :init
 
   def init
     self.slug ||= StringGenerator.slug_for_user
-    self.secret_token ||= StringGenerator.sha_hash(self.uid)
   end
 
   def to_param

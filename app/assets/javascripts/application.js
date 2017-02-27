@@ -31,7 +31,6 @@
 //= require js/pace/pace.min.js
 //= require js/nprogress.js
 //= require flash.js
-//= require websocket_rails/main
 
 
 $(document).ready(function() {
