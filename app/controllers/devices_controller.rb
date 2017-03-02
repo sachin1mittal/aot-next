@@ -68,7 +68,7 @@ class DevicesController < ApplicationController
   end
 
   def sdks
-    param! :platform, String, required: true, blank: false, in: %w(embedded_c nodejs)
+    param! :platform, String, required: true, blank: false, in: %w(embedded_c nodejs python)
     send_file File.join(Rails.root, 'public', 'device-sdks', "#{params[:platform]}.zip")
   end
 

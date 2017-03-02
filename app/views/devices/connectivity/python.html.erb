@@ -13,60 +13,56 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="min-height:600px;">
           <div class="x_title">
-            <h2>Embedded C</h2>
+            <h2>Python</h2>
             <div class="clearfix"></div>
           </div>
           <div>
             <div class="x_content">
             <h1 id="gulpfilejs">1. Download SDK</h1>
             <div class="alert alert-success alert-dismissible fade in" role="alert">
-              <h2>Download SDK from <code class="buu"><%= link_to 'here', devices_sdks_path(platform: :embedded_c), style: 'color: red;' %></code> and unzip it.</h2>
+              <h2>Download SDK from <code class="buu"><%= link_to 'here', devices_sdks_path(platform: :python), style: 'color: red;' %></code> and unzip it.</h2>
             </div>
             <hr>
-            <h1 id="gulpfilejs">2. Install <code class="buu">Make</code></h1>
+            <h1 id="gulpfilejs">2. Install Python and other Dependencies</h1>
             <div class="alert alert-success alert-dismissible fade in" role="alert">
               <h2>Run this command to traverse to the directory.</h2>
-              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>cd embedded_c</code></pre></figure>
+              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>cd python</code></pre></figure>
             </div>
             <div class="alert alert-success alert-dismissible fade in" role="alert">
-              <h2>Run this command to install Make. </h2>
-              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>sudo apt-get install make</code></pre></figure>
+              <h2>Run this command to install pip and other python essentials. ( skip this if python and pip are already present )</h2>
+              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>sudo apt-get install python-pip python-dev build-essential </code></pre></figure>
+            </div>
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+              <h2>Run this command to install script dependencies.</h2>
+              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>sudo pip install AWSIoTPythonSDK</code></pre></figure>
             </div>
             <hr>
             <h1 id="gulpfilejs">3. Download Credentials</h1>
             <blockquote>
               <p>Download credentials of your device from owned_devices panel. Unzip this file and copy all the files inside this folder to the certs folder of your current directory. Now, your directory structure should look like this..</p>
             </blockquote>
-            <figure class="br"><pre><code class="but" data-lang="bash">embedded_c/
-├── certs
+            <figure class="br"><pre><code class="but" data-lang="bash">python/
+├── script.py
+└── certs
     ├── private.pem.key
     ├── public.pem.key
     ├── certificate.pem.crt
-    └── root-CA.crt
-├── external_libs
-├── include
-├── platform
-├── script
-    ├── Makefile
-    ├── aws_iot_config.h
-    ├── script.c
-├── src</code></pre></figure><hr>
+    └── root-CA.crt</code></pre></figure><hr>
               <h1 id="gulpfilejs">4. Add Device Identity</h1>
               <blockquote>
-              <p>Replace <code class="buu">YOUR_DEVICE_SERIAL_NUMBER</code> with the actual serial number of your device which you created on dashboard. You have to replace this variable in the <code class="buu">embedded_c/script/script.c</code> and <code class="buu">embedded_c/script/aws_iot_config.h</code></p>
+              <p>Replace <code class="buu">YOUR_DEVICE_SERIAL_NUMBER</code> with the actual serial number of your device which you created on dashboard. You have to replace this variable in the script.py.</p>
             </blockquote>
             <hr>
               <h1 id="gulpfilejs">5. Handle Device Working</h1>
               <blockquote>
-              <p>You will get the signal on/off in <code class="buu">iot_subscribe_callback_handler</code> callback in script.c. Now, control your device as per these signals. Find this at line number 53 in script.c.</p>
+              <p>You will get the signal on/off in messageCallback in script.py. Now, control your device as per these signals. Find this at line number 5 in script.py.</p>
             </blockquote>
             </div>
             <hr>
               <h1 id="gulpfilejs">6. Run the script.</h1>
               <div class="alert alert-success alert-dismissible fade in" role="alert">
-                <h2>You can run this script using these two commands. Please note that you have to run both commands.</h2>
-                <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>make</code></pre></figure>
-                <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>./script.c</code></pre></figure>
+                <h2>You can run this script using this command.</h2>
+                <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>python script.py</code></pre></figure>
               </div>
             </div>
           </div>
