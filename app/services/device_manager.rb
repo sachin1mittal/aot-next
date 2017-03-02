@@ -139,7 +139,7 @@ class DeviceManager
     @device_handler ||= Aws::IoTDataPlane::Client.new(
                                             endpoint: ENV['AWS_ENDPOINT'],
                                             region: ENV['AWS_REGION'],
-                                            logger: File.open("log/aws_#{Rails.env}.log", 'a'))
+                                            logger: Rails.logger)
   end
 
 end

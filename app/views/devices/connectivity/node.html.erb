@@ -18,82 +18,57 @@
           </div>
           <div>
             <div class="x_content">
-
-                    <div class="col-xs-3">
-                      <!-- required for floating -->
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs tabs-left">
-                        <li class="active"><a href="#step-1" data-toggle="tab">1. Install Node Js</a>
-                        </li>
-                        <li><a href="#step-2" data-toggle="tab">3. Make Directory Structure</a>
-                        </li>
-                        <li><a href="#step-3" data-toggle="tab">4. Add Script</a>
-                        </li>
-                        <li><a href="#step-4" data-toggle="tab">5. Run Script</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="col-xs-9">
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <!-- First Tab -->
-                        <div class="tab-pane active" id="step-1">
-                          <h2>Run these command to install nodejs</h2>
-                          <ul class="to_do">
-                            <li>
-                              <h4><i>curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -</i></h4>
-                            </li>
-                            <li>
-                              <h4><i>sudo apt-get install -y nodejs</i></h4>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <!-- Second Tab -->
-                        <div class="tab-pane" id="step-2">
-                          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-
-                            <div class="menu_section">
-                              <div class="clearfix"></div>
-                              <ul class="nav side-menu">
-                                <li class=""><a><i class="fa fa-sitemap"></i>Folder Structure<span class="fa fa-chevron-down"></span></a>
-                                  <ul class="nav child_menu" style="display: none;">
-                                    <li><a>Device Connectivity<span class="fa fa-chevron-down"></span></a>
-                                      <ul class="nav child_menu" style="">
-                                        <li><%= link_to 'Node Js', users_help_path(category: :node) %>
-                                        </li>
-                                        <li><%= link_to 'Python', users_help_path(category: :python) %>
-                                        </li>
-                                        <li><%= link_to 'Embedded C', users_help_path(category: :embedded_c) %>
-                                        </li>
-                                        <li><%= link_to 'C++', users_help_path(category: :cpp) %>
-                                        </li>
-                                        <li><%= link_to 'Java', users_help_path(category: :java) %>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                  </ul>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- Third Tab -->
-                        <div class="tab-pane" id="step-3">Settings Tab.</div>
-
-                        <!-- Fourth Tab -->
-                        <div class="tab-pane" id="step-4">Run Script.</div>
-                      </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                  </div>
+            <h1 id="gulpfilejs">1. Download SDK</h1>
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+              <h2>Download SDK from <code class="buu"><%= link_to 'here', devices_sdks_path(platform: :nodejs), style: 'color: red;' %></code> and unzip it.</h2>
+            </div>
+            <hr>
+            <h1 id="gulpfilejs">2. Install Node and other Dependencies</h1>
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+              <h2>Run this command to traverse to the directory.</h2>
+              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>cd nodejs</code></pre></figure>
+            </div>
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+              <h2>Run this command to install nodejs. </h2>
+              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>sudo apt-get install nodejs</code></pre></figure>
+            </div>
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+              <h2>Run this command to install script dependencies.</h2>
+              <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>npm install aws-iot-device-sdk</code></pre></figure>
+            </div>
+            <hr>
+            <h1 id="gulpfilejs">3. Download Credentials</h1>
+            <blockquote>
+              <p>Download credentials of your device from owned_devices panel. Unzip this file and copy all the files inside this folder to the certs folder of your current directory. Now, your directory structure should look like this..</p>
+            </blockquote>
+            <figure class="br"><pre><code class="but" data-lang="bash">nodejs/
+├── script.js
+└── certs
+    ├── private.pem.key
+    ├── public.pem.key
+    ├── certificate.pem.crt
+    └── root-CA.crt</code></pre></figure><hr>
+              <h1 id="gulpfilejs">4. Add Device Identity</h1>
+              <blockquote>
+              <p>Replace <code class="buu">YOUR_DEVICE_SERIAL_NUMBER</code> with the actual serial number of your device which you created on dashboard. You have to replace this variable in the script.js.</p>
+            </blockquote>
+            <hr>
+              <h1 id="gulpfilejs">5. Handle Device Working</h1>
+              <blockquote>
+              <p>You will get the signal on/off in on_message callback in script.js. Now, control your device as per these signals. Find this at line number 18 in script.js.</p>
+            </blockquote>
+            </div>
+            <hr>
+              <h1 id="gulpfilejs">6. Run the script.</h1>
+              <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <h2>You can run this script using this command.</h2>
+                <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>node script.js</code></pre></figure>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

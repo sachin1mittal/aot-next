@@ -67,6 +67,11 @@ class DevicesController < ApplicationController
     send_file File.join(Rails.root, 'public', 'temp_device_credentials', 'certs.zip')
   end
 
+  def sdks
+    param! :platform, String, required: true, blank: false, in: %w(embedded_c nodejs)
+    send_file File.join(Rails.root, 'public', 'device-sdks', "#{params[:platform]}.zip")
+  end
+
   private
 
   def owned_devices

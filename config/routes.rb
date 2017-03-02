@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'users/search_by_email', to: 'users#search_by_email'
   get 'users/help', to: 'users#help'
+  get 'devices/sdks', to: 'devices#sdks'
   # get 'devices/dummy', to: 'devices#dummy'
   resources :users, only: [:show]
   # do
