@@ -64,7 +64,7 @@ class DevicesController < ApplicationController
 
   def script
     data = owned_device_manager.generate_credentails_file
-    send_file File.join(Rails.root, 'public', 'temp_device_credentials', 'credentials.zip')
+    send_file File.join(Rails.root, 'public', 'temp_device_credentials', 'certs.zip')
   end
 
   private

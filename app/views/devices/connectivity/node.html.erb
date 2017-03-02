@@ -1,0 +1,99 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Connectivity Procedure</h3>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="min-height:600px;">
+          <div class="x_title">
+            <h2>Node Js</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div>
+            <div class="x_content">
+
+                    <div class="col-xs-3">
+                      <!-- required for floating -->
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs tabs-left">
+                        <li class="active"><a href="#step-1" data-toggle="tab">1. Install Node Js</a>
+                        </li>
+                        <li><a href="#step-2" data-toggle="tab">3. Make Directory Structure</a>
+                        </li>
+                        <li><a href="#step-3" data-toggle="tab">4. Add Script</a>
+                        </li>
+                        <li><a href="#step-4" data-toggle="tab">5. Run Script</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-xs-9">
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <!-- First Tab -->
+                        <div class="tab-pane active" id="step-1">
+                          <h2>Run these command to install nodejs</h2>
+                          <ul class="to_do">
+                            <li>
+                              <h4><i>curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -</i></h4>
+                            </li>
+                            <li>
+                              <h4><i>sudo apt-get install -y nodejs</i></h4>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <!-- Second Tab -->
+                        <div class="tab-pane" id="step-2">
+                          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                            <div class="menu_section">
+                              <div class="clearfix"></div>
+                              <ul class="nav side-menu">
+                                <li class=""><a><i class="fa fa-sitemap"></i>Folder Structure<span class="fa fa-chevron-down"></span></a>
+                                  <ul class="nav child_menu" style="display: none;">
+                                    <li><a>Device Connectivity<span class="fa fa-chevron-down"></span></a>
+                                      <ul class="nav child_menu" style="">
+                                        <li><%= link_to 'Node Js', users_help_path(category: :node) %>
+                                        </li>
+                                        <li><%= link_to 'Python', users_help_path(category: :python) %>
+                                        </li>
+                                        <li><%= link_to 'Embedded C', users_help_path(category: :embedded_c) %>
+                                        </li>
+                                        <li><%= link_to 'C++', users_help_path(category: :cpp) %>
+                                        </li>
+                                        <li><%= link_to 'Java', users_help_path(category: :java) %>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Third Tab -->
+                        <div class="tab-pane" id="step-3">Settings Tab.</div>
+
+                        <!-- Fourth Tab -->
+                        <div class="tab-pane" id="step-4">Run Script.</div>
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

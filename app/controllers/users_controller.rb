@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   # end
 
   def help
+    param! :category, String, required: true, blank: false, in: %w(java cpp node python embedded_c)
+    render "devices/connectivity/#{params[:category]}"
   end
 
   def dashboard

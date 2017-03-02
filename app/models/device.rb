@@ -41,8 +41,10 @@ class Device < ActiveRecord::Base
   end
 
   def toggle
-    return self.on! if self.off?
-    self.off! if self.on?
+    statuses = self.class.statuses.keys
+    current_index = statuses.index(self.status)
+    current_index = (current_index + 1) % statuses.count
+    self.public_send("#{statuses[current_index]}!")
   end
 
   def self.find(input)

@@ -54,8 +54,27 @@
                 </li>
               </ul>
             </li>
+            <li class=""><a><i class="fa fa-sitemap"></i> Help <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="display: none;">
+                <li><a>Device Connectivity<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu" style="">
+                    <li><%= link_to 'Node Js', users_help_path(category: :node) %>
+                    </li>
+                    <li><%= link_to 'Python', users_help_path(category: :python) %>
+                    </li>
+                    <li><%= link_to 'Embedded C', users_help_path(category: :embedded_c) %>
+                    </li>
+                    <li><%= link_to 'C++', users_help_path(category: :cpp) %>
+                    </li>
+                    <li><%= link_to 'Java', users_help_path(category: :java) %>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+
