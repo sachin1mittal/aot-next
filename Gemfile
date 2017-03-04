@@ -28,6 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'letter_opener'
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
@@ -53,3 +54,4 @@ gem 'aws-sdk', '~> 2'
 gem 'rails_param'
 gem 'puma'
 gem 'switchery-rails'
+gem 'exception_notification'
