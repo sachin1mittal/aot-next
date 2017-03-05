@@ -36,6 +36,16 @@
         <div class="menu_section">
           <div class="clearfix"></div>
           <ul class="nav side-menu">
+            <% if current_user.admin? %>
+              <li><a><i class="fa fa-cogs"></i> Admin Panel <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none">
+                  <li><%= link_to 'Users', users_path %>
+                  </li>
+                  <li><%= link_to 'Roles', roles_path %>
+                  </li>
+                </ul>
+              </li>
+            <% end %>
             <!-- <li><a><i class="fa fa-bolt"></i> Networks <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu" style="display: none">
                 <li><%#= link_to 'Add New Network', new_network_path %>
@@ -58,11 +68,11 @@
               <ul class="nav child_menu" style="display: none;">
                 <li><a>Device Connectivity<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="">
-                    <li><%= link_to 'Node Js', users_help_path(category: :node) %>
+                    <li><%= link_to 'Node Js', devices_help_path(category: :node) %>
                     </li>
-                    <li><%= link_to 'Embedded C', users_help_path(category: :embedded_c) %>
+                    <li><%= link_to 'Embedded C', devices_help_path(category: :embedded_c) %>
                     </li>
-                    <li><%= link_to 'Python', users_help_path(category: :python) %>
+                    <li><%= link_to 'Python', devices_help_path(category: :python) %>
                     </li>
                   </ul>
                 </li>

@@ -7,15 +7,12 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'users#dashboard', as: :dashboard
 
   get 'users/search_by_email', to: 'users#search_by_email'
-  get 'users/help', to: 'users#help'
   get 'devices/sdks', to: 'devices#sdks'
+  get 'devices/help', to: 'devices#help'
   # get 'devices/dummy', to: 'devices#dummy'
-  resources :users, only: [:show]
-  # do
-    # put 'add_role'
-    # put 'remove_role'
-    # post 'change_token'
-  # end
+  resources :users, except: [:new, :create]
+
+  resources :roles, except: [:new, :show]
   # resources  :networks, except: [:show] do
   #   put 'add_device'
   #   put 'remove_device'

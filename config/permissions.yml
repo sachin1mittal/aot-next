@@ -1,0 +1,35 @@
+open:
+  sessions:
+    - 'create'
+    - 'login'
+
+users:
+  - 'dashboard'
+  - 'search_by_email'
+  - 'index'
+  - 'show'
+  - 'update'
+  - 'destroy'
+  - 'edit'
+
+devices:
+  - 'add_user'
+  - 'create'
+  - 'help'
+  - 'destroy'
+  - 'index'
+  - 'remove_user'
+  - 'script'
+  - 'sdks'
+  - 'toggle'
+  - 'update'
+
+sessions:
+  - 'destroy'
+
+roles:
+  - 'create'
+  - 'destroy'
+  - 'edit'
+  - 'index'
+  - 'update'

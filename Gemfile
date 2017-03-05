@@ -55,3 +55,4 @@ gem 'rails_param'
 gem 'puma'
 gem 'switchery-rails'
 gem 'exception_notification'
+gem "select2-rails"

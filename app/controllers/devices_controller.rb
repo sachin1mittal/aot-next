@@ -8,6 +8,11 @@ class DevicesController < ApplicationController
     @devices = filtered_devices
   end
 
+  def help
+    param! :category, String, required: true, blank: false, in: %w(node embedded_c python)
+    render "devices/connectivity/#{params[:category]}"
+  end
+
   # def dummy
   # end
 

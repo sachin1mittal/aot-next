@@ -1,0 +1,6 @@
+<tr class="even pointer">
+  <td><%= role.label %></td>
+  <td><%= link_to 'Edit', edit_role_path(role), class: 'btn btn-info' %>
+    <%= link_to 'Delete', role_path(role), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

@@ -14,6 +14,7 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require switchery
+//= require select2
 //= require js/flot/jquery.flot.js
 //= require js/flot/jquery.flot.pie.js
 //= require js/flot/jquery.flot.orderBars.js
@@ -35,6 +36,7 @@
 
 $(document).ready(function() {
 
+  $(".tags-multi-select").select2();
   $('.js-switch').on('change', function (event, state) {
     var self = this;
     // $(self).attr('disabled',true);

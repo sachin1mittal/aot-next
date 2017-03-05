@@ -1,15 +1,24 @@
 class UsersController < ApplicationController
 
-  # def index
-  #   @users = User.all
-  # end
+  before_action :set_user, only: [:edit, :destroy, :update]
 
-  # def edit
-  # end
+  def index
+    @users = User.all
+  end
 
-  def help
-    param! :category, String, required: true, blank: false, in: %w(node embedded_c python)
-    render "devices/connectivity/#{params[:category]}"
+  def edit
+  end
+
+  def update
+    @user.update_attributes!(params_attributes)
+    flash[:success] = 'Successfully Updated User'
+    redirect_to :back
+  end
+
+  def destroy
+    @user.destroy!
+    flash[:success] = 'Successfully Destroyed User'
+    redirect_to :back
   end
 
   def dashboard
@@ -28,43 +37,6 @@ class UsersController < ApplicationController
     @already_user = @user.devices.pluck(:id).include?(@device.id) if @user.present?
   end
 
-  # def update
-  #   current_user.update(params_attribute)
-  #   user_manager.update_password(params[:password])
-  #   flash[:success] = 'Profile Updated Successfully'
-  #   render :show
-  # end
-
-  # def change_token
-  #   user_manager.change_token
-  #   flash[:success] = 'Secret Token Updated Successfully'
-  #   render :show
-  # end
-
-  # def destroy
-  #   session[:user_id] = nil
-  #   flash[:success] = 'You have beed logged out'
-  #   redirect_to root_path
-  # end
-
-  # def add_role
-  #   role = Role.find_by(label: params[:role])
-  #   user = User.find(params[:user_id])
-  #   user.roles.push(role)
-  #   flash[:success] = 'Successfully Added Role'
-  #   flash.keep
-  #   redirect_to action: :index
-  # end
-
-  # def remove_role
-  #   role = Role.find_by(label: params[:role])
-  #   user = User.find(params[:user_id])
-  #   user.roles.destroy(role)
-  #   flash[:success] = 'Successfully Removed Role'
-  #   flash.keep
-  #   redirect_to action: :index
-  # end
-
   private
 
   def user_manager
@@ -72,10 +44,18 @@ class UsersController < ApplicationController
   end
 
   def params_attributes
-    params.require(:user).permit(:name, :photo)
+    if current_user.admin?
+      params.require(:user).permit(:name, :photo, role_ids: [])
+    else
+      params.require(:user).permit(:name, :photo)
+    end
   end
 
-  def user_errors(user)
-    user.errors.messages.map{|key, value| key.to_s + ' ' + value.join(', ') }.join(', ')
+  def set_user
+    if current_user.admin?
+      @user ||= User.find_by_slug!(params[:device_id] || params[:id])
+    else
+      @user ||= current_user
+    end
   end
 end
