@@ -30,14 +30,14 @@
                 </div>
               <% end %>
 
-              <%= link_to devices_path(category: :shared) do %>
+              <%= link_to devices_help_path(category: :embedded_c) do %>
                 <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-code-fork"></i>
+                    <div class="icon"><i class="fa fa-book"></i>
                     </div>
-                    <div class="count"><%= @shared_devices.count %></div>
+                    <div class="count">Embedded C</div>
 
-                    <h3>Shared <%= 'Device'.pluralize(@shared_devices.count) %></h3>
+                    <h3>Connect with Embedded C Client</h3>
                   </div>
                 </div>
               <% end %>
@@ -66,6 +66,42 @@
                 </div> -->
               <%# end %>
 
+              <%= link_to devices_help_path(category: :node) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-book"></i>
+                    </div>
+                    <div class="count">Node Js</div>
+
+                    <h3>Connect with Node Js Client</h3>
+                  </div>
+                </div>
+              <% end %>
+
+              <%= link_to devices_path(category: :shared) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-code-fork"></i>
+                    </div>
+                    <div class="count"><%= @shared_devices.count %></div>
+
+                    <h3>Shared <%= 'Device'.pluralize(@shared_devices.count) %></h3>
+                  </div>
+                </div>
+              <% end %>
+
+              <%= link_to devices_help_path(category: :python) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-book"></i>
+                    </div>
+                    <div class="count">Python</div>
+
+                    <h3>Connect with Python Client</h3>
+                  </div>
+                </div>
+              <% end %>
+
               <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-group"></i>
@@ -75,6 +111,18 @@
                   <h3>Shared <%= 'User'.pluralize(@shared_users.count) %></h3>
                 </div>
               </div>
+
+              <%= link_to devices_path(category: :owned) do %>
+                <div class="animated flipInY col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-chain"></i>
+                    </div>
+                    <div class="count">New Device</div>
+
+                    <h3>Add New Device Here</h3>
+                  </div>
+                </div>
+              <% end %>
 
             </div>
           </div>

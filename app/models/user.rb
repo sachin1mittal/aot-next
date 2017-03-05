@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
-      user.roles.push(Role.find_by(label: :normal)) unless user.normal?
+      user.roles.push(Role.normal) unless user.normal?
     end
   end
 

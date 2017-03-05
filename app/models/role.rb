@@ -4,6 +4,12 @@ class Role < ActiveRecord::Base
 
   validates_presence_of :label
   validates_uniqueness_of :label
-  scope :admin, -> { where(label: :admin) }
-  scope :normal, -> { where(label: :normal) }
+
+  def self.admin
+    find_by_label(:Admin)
+  end
+
+  def self.normal
+    find_by_label(:Normal)
+  end
 end
