@@ -7,8 +7,8 @@ class DeviceManager
   end
 
   def generate_credentails_file
-    FileUtils.rm_rf(File.join(Rails.root, 'public', 'temp_device_credentials', 'credentials'))
-    Dir.mkdir(File.join(Rails.root, 'public', 'temp_device_credentials', 'credentials'), 0777)
+    FileUtils.rm_rf(File.join(Rails.root, 'public', 'temp_device_credentials', 'certs'))
+    Dir.mkdir(File.join(Rails.root, 'public', 'temp_device_credentials', 'certs'), 0777)
     @certificate = device.aws_thing.aws_certificate
     generate_private_key
     generate_public_key
@@ -23,7 +23,7 @@ class DeviceManager
                       Rails.root,
                       'public',
                       'temp_device_credentials',
-                      'credentials',
+                      'certs',
                       'private.pem.key'
                     ),
                     'w+'
@@ -38,7 +38,7 @@ class DeviceManager
                       Rails.root,
                       'public',
                       'temp_device_credentials',
-                      'credentials',
+                      'certs',
                       'public.pem.key'
                     ),
                     'w+'
@@ -53,7 +53,7 @@ class DeviceManager
                       Rails.root,
                       'public',
                       'temp_device_credentials',
-                      'credentials',
+                      'certs',
                       'certificate.pem.crt'
                     ),
                     'w+'
@@ -64,13 +64,13 @@ class DeviceManager
 
   def copy_root_certificate
     src = File.join(Rails.root, 'app', 'views', 'templates', 'root-CA.crt')
-    dst = File.join(Rails.root, 'public', 'temp_device_credentials', 'credentials', 'root-CA.crt')
+    dst = File.join(Rails.root, 'public', 'temp_device_credentials', 'certs', 'root-CA.crt')
     FileUtils.cp(src, dst)
   end
 
   def create_zip_file
-    path = Rails.root.to_s + "/public/temp_device_credentials/credentials"
-    archive = Rails.root.to_s + "/public/temp_device_credentials/credentials.zip"
+    path = Rails.root.to_s + '/public/temp_device_credentials/certs'
+    archive = Rails.root.to_s + '/public/temp_device_credentials/certs.zip'
     `rm "#{archive}"`
     `zip -rj "#{archive}" "#{path}"`
   end

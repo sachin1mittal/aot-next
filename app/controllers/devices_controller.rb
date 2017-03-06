@@ -6,6 +6,9 @@ class DevicesController < ApplicationController
 
   def index
     @devices = filtered_devices
+    render_response(data: {
+      devices: @devices
+    })
   end
 
   def help
@@ -28,27 +31,33 @@ class DevicesController < ApplicationController
   # end
 
   def create
-    device = current_user.owned_devices.create(params_attributes)
+    device = current_user.owned_devices.create!(params_attributes)
     flash[:success] = 'Successfully created device'
-    redirect_to devices_path(category: :owned)
+    render_response(
+      redirect_path: devices_path(category: :owned)
+    )
   end
 
   def update
-    @owned_device.update(params_attributes)
+    @owned_device.update_attributes!(params_attributes)
     flash[:success] = 'Successfully updated device'
-    redirect_to devices_path(category: :owned)
+    render_response(
+      redirect_path: devices_path(category: :owned)
+    )
   end
 
   def destroy
     device_manager.remove_user(current_user)
     flash[:success] = 'Success removed device'
-    redirect_to devices_path(category: :owned)
+    render_response(
+      redirect_path: devices_path(category: :owned)
+    )
   end
 
   def toggle
     param! :state, String, in: %w(on off)
     device_manager.toggle
-    render json: { success: :true }
+    render_response
   end
 
   def add_user
@@ -56,7 +65,9 @@ class DevicesController < ApplicationController
     user = User.find_by_email!(params[:email])
     owned_device_manager.add_user(user)
     flash[:success] = 'Successfully added user'
-    redirect_to device_path(@owned_device)
+    render_response(
+      redirect_path: device_path(@owned_device)
+    )
   end
 
   def remove_user
@@ -64,7 +75,9 @@ class DevicesController < ApplicationController
     user = User.find_by_email!(params[:email])
     owned_device_manager.remove_user(user)
     flash[:success] = 'Successfully removed user'
-    redirect_to device_path(@owned_device)
+    render_response(
+      redirect_path: device_path(@owned_device)
+    )
   end
 
   def script

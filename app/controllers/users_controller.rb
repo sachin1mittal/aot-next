@@ -27,6 +27,12 @@ class UsersController < ApplicationController
     # @networks = current_user.networks
     @shared_users = current_user.shared_users
     @all_devices = current_user.devices
+    render_response(data: {
+      owned_devices: @owned_devices,
+      shared_devices: @shared_devices,
+      shared_users: @shared_users,
+      all_devices: @all_devices
+    })
   end
 
   def search_by_email
@@ -34,7 +40,12 @@ class UsersController < ApplicationController
     param! :device_slug, String, required: true, blank: false
     @user = User.find_by_email!(params[:email])
     @device = current_user.devices.find_by_slug!(params[:device_slug])
-    @already_user = @user.devices.pluck(:id).include?(@device.id) if @user.present?
+    @already_user = @user.devices.pluck(:id).include?(@device.id)
+    render_response(data: {
+      device: @device,
+      user: @user,
+      already_user: @already_user
+    })
   end
 
   private

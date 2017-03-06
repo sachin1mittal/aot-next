@@ -56,3 +56,4 @@ gem 'puma'
 gem 'switchery-rails'
 gem 'exception_notification'
 gem "select2-rails"
+gem "active_model_serializers"

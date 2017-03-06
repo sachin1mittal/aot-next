@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Concerns::Errors
   include Concerns::ErrorHandlers
+  include Concerns::ResponseGenerator
 
   protect_from_forgery
 
@@ -20,4 +21,5 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
 end
