@@ -9,7 +9,7 @@ class DevicesController < ApplicationController
   end
 
   def help
-    param! :category, String, required: true, blank: false, in: %w(node embedded_c python)
+    param! :category, String, required: true, blank: false, in: %w(node embedded_c python procedure)
     render "devices/connectivity/#{params[:category]}"
   end
 

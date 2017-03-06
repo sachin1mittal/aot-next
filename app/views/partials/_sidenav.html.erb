@@ -68,6 +68,8 @@
               <ul class="nav child_menu" style="display: none;">
                 <li><a>Device Connectivity<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu" style="">
+                    <li><%= link_to 'Procedure', devices_help_path(category: :procedure) %>
+                    </li>
                     <li><%= link_to 'Node Js', devices_help_path(category: :node) %>
                     </li>
                     <li><%= link_to 'Embedded C', devices_help_path(category: :embedded_c) %>

@@ -1,0 +1,90 @@
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Connectivity Procedure</h3>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="min-height:600px;">
+          <div class="x_title">
+            <h2>Step-by-step procedure to connect your board to the dashboard (webserver):</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <blockquote>
+              <p>Select one of the microcontroller chip from list below and connect it to the WIFI</p>
+            </blockquote>
+            <blockquote>
+              <p>Create a new device <code class="buu"><%= link_to 'here', devices_path(category: :owned), style: 'color: red;' %></code> by clicking on "Add New Device"</p>
+            </blockquote>
+            <blockquote>
+              <p>Download the new device’s Credential files along with One supported set of libraries (provided on the dashboard in three languages i.e. Python, Node.js and Embedded C)</p>
+            </blockquote>
+            <blockquote>
+              <p>Save certificate files and libraries on the chip as suggested in particular documentation</p>
+            </blockquote>
+            <blockquote>
+              <p>After getting Internet access on the chip, connect it to the web server. (Given in the documentation.)</p>
+            </blockquote>
+            <blockquote>
+              <p>After a successful connection with the web server, you can control the chip from the Dashboard. When you “Switch On” the device (On dashboard), you will receive an “On” response on the chip's console. Similarly, when you “Switch Off” the device (On dashboard), you will receive an “Off"”response on the chip's console. You have to read the response and according to the value of the response, you have to control a LED bulb or Fan attached to the chip.</p>
+            </blockquote>
+
+            <button type="button" class="btn btn-dark btn-sm" style="width: 100%;"  disabled="disabled">The last date to submit a working project is 25th March 2017.</button>
+
+            <h1>List of Chips that can be used for this project:</h1>
+            <ul class="to_do">
+              <li>
+                <p><a href="https://www.olimex.com/Products/IoT/ESP8266-EVB/open-source-hardware"> ESP8266-EVB </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.seeedstudio.com/Wio-Node-p-2637.html"> Wio Node </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.seeedstudio.com/NodeMCU-v2-Lua-based-ESP8266-development-kit-p-2415.html"> NodeMCU v2 </a></p>
+              </li>
+              <li>
+                <p><a href="http://www.amazon.in/ESP8266-NodeMcu-WiFi-Development-Board/dp/B00UY8C3N0"> NodeMcu </a></p>
+              </li>
+              <li>
+                <p><a href="http://www.amazon.in/D1-mini-V2-Internet-development/dp/B01FMJ0H2Y"> D1 mini V2 - Mini NodeMcu </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.ubuy.co.in/catalog/product/view/id/3375116/s/hiletgo-d1-mini-nodemcu-4m-bytes-lua-wifi-development-board-esp8266-compatiable-to-wemos?sku=B01IXBWH9Y&store=US"> HiLetgo D1 Mini NodeMcu </a></p>
+              </li>
+              <li>
+                <p><a href="http://www.explorelabs.com/explore-labs-esp8266-wifi-internet-of-things-iot-breakout"> EXPLORE LABS ESP8266 WIFI </a></p>
+              </li>
+              <li>
+                <p><a href="http://www.8devices.com/products/carambola-2"> Carambola 2 </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.adafruit.com/products/2471"> Adafruit HUZZAH ESP8266 Breakout </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.adafruit.com/products/2821"> Adafruit Feather HUZZAH with ESP8266 WiFi </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.adafruit.com/products/3046"> Assembled Adafruit Feather HUZZAH with ESP8266 WiFi </a></p>
+              </li>
+              <li>
+                <p><a href="http://vocore.io/v2.html"> VoCore2 </a></p>
+              </li>
+              <li>
+                <p><a href="https://www.olimex.com/Products/IoT/MOD-WIFI-ESP8266-DEV/open-source-hardware"> MOD-WIFI-ESP8266-DEV </a></p>
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-dark btn-sm"  style="width: 100%;" disabled="disabled">It is not mandatory to use a chip from above list. You can choose some other compact-sized chip as well but confirm with us before deciding to work on it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
