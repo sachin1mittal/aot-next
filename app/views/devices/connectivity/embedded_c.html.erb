@@ -44,8 +44,15 @@
     ├── certificate.pem.crt
     └── root-CA.crt
 ├── external_libs
-├── include
+    ├── CppUTest
+    ├── jsmn (contains several header and lib files)
+    └── mbedTLS (contains several files and folders)
+├── include (contains several header files)
 ├── platform
+    └── linux
+        ├── common (contains several header and lib files)
+        ├── mbedtls (contains several header and lib files)
+        └── pthread (contains several header and lib files)
 ├── script
     ├── Makefile
     ├── aws_iot_config.h
@@ -64,8 +71,15 @@
             <hr>
               <h1 id="gulpfilejs">6. Run the script.</h1>
               <div class="alert alert-success alert-dismissible fade in" role="alert">
-                <h2>You can run this script using these two commands. Please note that you have to run both commands.</h2>
+                <h2>Run this command to traverse to the directory.</h2>
+                <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>cd script</code></pre></figure>
+              </div>
+              <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <h2>Build Your project dependencies by running this command</h2>
                 <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>make</code></pre></figure>
+              </div>
+              <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <h2>Run the script using this command</h2>
                 <figure class="br"><pre><code class="but" data-lang="bash"><span class="x">$ </span>./script.c</code></pre></figure>
               </div>
             </div>
